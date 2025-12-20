@@ -1,0 +1,287 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* DARK MODE DEFAULT */
+    --background: 240 10% 4%;
+    /* Almost black */
+    --foreground: 0 0% 98%;
+    /* Off-white */
+
+    --card: 240 10% 7%;
+    /* Slightly lighter dark for cards */
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 7%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 47 95% 50%;
+    /* Gold/Amber for high contrast on dark */
+    --primary-foreground: 240 10% 4%;
+
+    --secondary: 240 5% 15%;
+    /* Dark Grey */
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 5% 15%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 240 5% 15%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5% 15%;
+    --input: 240 5% 15%;
+    --ring: 47 95% 50%;
+
+    --radius: 0.25rem;
+
+    /* Custom Font Variables */
+    --font-head: 'Roboto Condensed', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+
+    /* Event Colors */
+    --color-game: hsl(25 92% 46%);
+    --color-practice: hsl(200 80% 50%);
+    --color-media: hsl(280 60% 60%);
+
+    /* Status Colors */
+    --status-active: #10b981;
+    --status-injured: #ef4444;
+    --status-day-to-day: #fbbf24;
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+
+    /* Typography Overrides */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-head;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply px-6 py-3 bg-primary text-black font-bold uppercase tracking-wider transition-all duration-300 hover:bg-white hover:scale-105 active:scale-95 inline-block text-center shadow-lg font-head;
+    }
+
+    .btn-outline {
+        @apply px-6 py-3 border-2 border-primary text-primary font-bold uppercase tracking-wider transition-all duration-300 hover:bg-primary hover:text-black hover:scale-105 active:scale-95 inline-block text-center font-head;
+    }
+
+    .section-title {
+        @apply text-3xl md:text-5xl font-black italic uppercase tracking-tighter mb-8 text-foreground relative inline-block;
+    }
+
+    .section-title::after {
+        content: '';
+        @apply absolute -bottom-2 left-0 w-1/2 h-1 bg-primary;
+    }
+
+    .section-title-tag {
+        @apply text-base md:text-xl text-primary font-bold not-italic ml-3 align-middle bg-primary/10 px-2 py-1 rounded;
+    }
+
+    /* Cards */
+    .division-card {
+        @apply bg-card border border-border/50 rounded-sm p-0 overflow-hidden hover:border-primary/50 transition-colors shadow-sm;
+    }
+
+    .division-title {
+        @apply bg-card border-b border-border/50 p-3 text-lg font-bold text-center uppercase tracking-wider text-muted-foreground;
+    }
+
+    /* Tables */
+    .stats-table {
+        @apply w-full border-collapse text-sm;
+    }
+
+    .th-cell {
+        @apply bg-card text-xs font-bold text-muted-foreground uppercase tracking-wider text-left p-3 border-b border-border sticky top-0 whitespace-nowrap;
+    }
+
+    .td-cell {
+        @apply p-3 border-b border-border/50 align-middle;
+    }
+
+    .table-row {
+        @apply hover:bg-white/5 transition-colors;
+    }
+
+    /* Team Cells */
+    .team-cell {
+        @apply flex items-center gap-3 p-3;
+    }
+
+    .team-logo-small {
+        @apply w-8 h-8 object-contain;
+    }
+
+    .rank-1 {
+        @apply border-l-4 border-primary bg-primary/5;
+    }
+
+    .eliminated {
+        @apply opacity-70;
+    }
+
+    /* Ticker */
+    .ticker-wrap {
+        @apply w-full overflow-hidden h-9 bg-primary text-black flex items-center relative z-40 border-b-2 border-black;
+    }
+
+    .ticker {
+        @apply flex whitespace-nowrap animate-ticker;
+    }
+
+    .ticker-item {
+        @apply px-4 font-bold font-head uppercase text-xs tracking-wider flex items-center gap-4;
+    }
+
+    /* Player Cells */
+    .player-cell {
+        @apply flex items-center gap-3;
+    }
+
+    .player-avatar {
+        @apply w-8 h-8 md:w-10 md:h-10 rounded-full bg-secondary object-cover border border-border;
+    }
+
+    /* Status Badges */
+    .status-badge {
+        @apply text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full;
+    }
+
+    .status-active {
+        @apply bg-green-900/30 text-green-400;
+    }
+
+    .status-injured {
+        @apply bg-red-900/30 text-red-400;
+    }
+
+    .status-dtd {
+        @apply bg-yellow-900/30 text-yellow-400;
+    }
+
+    /* Inputs */
+    .search-input {
+        @apply w-full md:max-w-xs bg-card border border-border rounded px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder:text-muted-foreground/50;
+    }
+
+    .filter-select {
+        @apply bg-card border border-border rounded px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer uppercase text-sm font-bold;
+    }
+
+    .stats-controls {
+        @apply flex flex-col md:flex-row gap-4 justify-between items-center bg-card p-4 rounded-sm border border-border/50 shadow-sm;
+    }
+
+    /* Calendar */
+    .calendar-header {
+        @apply flex flex-col md:flex-row justify-between items-center mb-8 gap-4;
+    }
+
+    .calendar-month-display {
+        @apply text-xl font-bold uppercase tracking-widest bg-card px-8 py-2 border border-border rounded flex items-center justify-center min-w-[200px];
+    }
+
+    .calendar-container {
+        @apply bg-card border border-border rounded-sm p-4 overflow-hidden shadow-lg;
+    }
+
+    .calendar-grid {
+        @apply grid grid-cols-7 gap-px bg-border;
+    }
+
+    .calendar-day-header {
+        @apply bg-secondary/50 p-2 text-center text-xs font-bold uppercase tracking-wider text-muted-foreground;
+    }
+
+    .calendar-day {
+        @apply bg-card min-h-[100px] p-2 relative transition-all duration-200 hover:bg-white/5 cursor-pointer flex flex-col gap-1;
+    }
+
+    .calendar-day.active {
+        @apply ring-2 ring-inset ring-primary z-10 bg-primary/5;
+    }
+
+    .calendar-day.is-disabled {
+        @apply bg-secondary/20 cursor-default hover:bg-secondary/20;
+    }
+
+    .day-number {
+        @apply text-sm font-bold text-muted-foreground;
+    }
+
+    .active .day-number {
+        @apply text-primary;
+    }
+
+    .event-dots {
+        @apply flex flex-wrap gap-1 mt-auto;
+    }
+
+    .event-dot {
+        @apply w-2 h-2 rounded-full;
+    }
+
+    .calendar-legend {
+        @apply flex flex-wrap gap-4 mb-6 text-xs uppercase font-bold tracking-wide justify-center md:justify-start;
+    }
+
+    .legend-item {
+        @apply flex items-center gap-2 text-muted-foreground;
+    }
+
+    .legend-color {
+        @apply w-3 h-3 rounded-full;
+    }
+
+    /* Event List */
+    .event-list-container {
+        @apply mt-8 bg-card border border-border rounded-sm p-6;
+    }
+
+    .event-list-title {
+        @apply text-xl font-bold uppercase tracking-wider mb-6 border-b border-border pb-4;
+    }
+
+    .event-list-item {
+        @apply flex flex-col md:flex-row gap-4 md:gap-8 p-4 border-b border-border/50 hover:bg-white/5 transition-colors last:border-0;
+    }
+
+    .event-time {
+        @apply text-primary font-bold font-head text-lg min-w-[100px];
+    }
+
+    .event-details {
+        @apply flex-1;
+    }
+
+    .event-details h4 {
+        @apply text-lg font-bold uppercase mb-1;
+    }
+
+    .event-details p {
+        @apply text-muted-foreground text-sm;
+    }
+
+    .event-tag {
+        @apply text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded mb-2 inline-block;
+    }
+}
