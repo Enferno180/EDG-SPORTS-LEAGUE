@@ -3,6 +3,8 @@
 import React, { useState, useMemo } from 'react';
 import { TEAMS } from '@/lib/data';
 
+import { CaretUp, CaretDown, CaretUpDown } from '@phosphor-icons/react';
+
 export default function TeamStatsPage() {
     const [teamSort, setTeamSort] = useState({ column: 'wins', direction: 'desc' as 'asc' | 'desc' });
 
@@ -64,6 +66,13 @@ export default function TeamStatsPage() {
         });
     };
 
+    const getSortIcon = (column: string) => {
+        if (teamSort.column !== column) return <CaretUpDown className="opacity-20 ml-1 inline-block" size={16} />;
+        return teamSort.direction === 'asc'
+            ? <CaretUp className="text-white ml-1 inline-block" size={16} weight="fill" />
+            : <CaretDown className="text-white ml-1 inline-block" size={16} weight="fill" />;
+    };
+
     return (
         <section className="container mx-auto px-5 py-8 min-h-screen">
             <h2 className="section-title mb-6">TEAM STATISTICS</h2>
@@ -72,12 +81,12 @@ export default function TeamStatsPage() {
                 <table className="stats-table">
                     <thead>
                         <tr>
-                            <th onClick={() => sortTeams('name')} className="th-cell sortable cursor-pointer hover:text-white">TEAM</th>
-                            <th onClick={() => sortTeams('wins')} className="th-cell sortable cursor-pointer hover:text-white">W-L</th>
-                            <th onClick={() => sortTeams('ppg')} className="th-cell sortable cursor-pointer hover:text-white">PTS/G</th>
-                            <th onClick={() => sortTeams('oppPpg')} className="th-cell sortable cursor-pointer hover:text-white">OPP PTS/G</th>
-                            <th onClick={() => sortTeams('diff')} className="th-cell sortable cursor-pointer hover:text-white">DIFF</th>
-                            <th onClick={() => sortTeams('streak')} className="th-cell sortable cursor-pointer hover:text-white">STREAK</th>
+                            <th onClick={() => sortTeams('name')} className="th-cell sortable cursor-pointer hover:text-white">TEAM {getSortIcon('name')}</th>
+                            <th onClick={() => sortTeams('wins')} className="th-cell sortable cursor-pointer hover:text-white">W-L {getSortIcon('wins')}</th>
+                            <th onClick={() => sortTeams('ppg')} className="th-cell sortable cursor-pointer hover:text-white">PTS/G {getSortIcon('ppg')}</th>
+                            <th onClick={() => sortTeams('oppPpg')} className="th-cell sortable cursor-pointer hover:text-white">OPP PTS/G {getSortIcon('oppPpg')}</th>
+                            <th onClick={() => sortTeams('diff')} className="th-cell sortable cursor-pointer hover:text-white">DIFF {getSortIcon('diff')}</th>
+                            <th onClick={() => sortTeams('streak')} className="th-cell sortable cursor-pointer hover:text-white">STREAK {getSortIcon('streak')}</th>
                         </tr>
                     </thead>
                     <tbody>

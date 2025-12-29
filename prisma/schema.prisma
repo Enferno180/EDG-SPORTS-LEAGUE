@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?   // For Credentials provider (optional)
+  role          String    @default("FAN") // ADMIN, COACH, PLAYER, FAN
+  subscriptionTier String @default("FREE") // FREE, TIER_1, TIER_2, TIER_3
+  accounts      Account[]
+  sessions      Session[]
+  scoutingNotes ScoutingNote[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Team {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  logo           String
+  wins           Int      @default(0)
+  losses         Int      @default(0)
+  primaryColor   String
+  secondaryColor String
+  
+  // Team Stats / Power Rankings
+  offRating      Float    @default(0.0)
+  defRating      Float    @default(0.0)
+  netRating      Float    @default(0.0)
+  teamPpg        Float    @default(0.0)
+  teamRpg        Float    @default(0.0)
+  teamApg        Float    @default(0.0)
+
+  players        Player[]
+}
+
+model Player {
+  id        String  @id @default(cuid())
+  name      String
+  number    Int?
+  position  String
+  height    String
+  weight    String
+  teamId    String?
+  team      Team?   @relation(fields: [teamId], references: [id], onDelete: SetNull)
+  ovr       Int     @default(60)
+  archetype String? // e.g. "Playmaking Shot Creator"
+  avatar    String?
+  mpg       Float?  @default(0.0) // Minutes Per Game
+  
+  // Registration / Prospect Fields
+  isProspect Boolean @default(false)
+  email      String?
+  phone      String?
+  school     String?
+  hometown   String?
+  dob        String?
+  
+  attendance Attendance[]
+  notes      ScoutingNote[]
+}
+
+model Attendance {
+  id        String   @id @default(cuid())
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  date      DateTime @default(now())
+  status    String   // "ON_TIME", "LATE", "NO_SHOW"
+  
+  @@index([playerId])
+}
+
+model ScoutingNote {
+  id        String   @id @default(cuid())
+  content   String
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([playerId])
+  @@index([authorId])
+}

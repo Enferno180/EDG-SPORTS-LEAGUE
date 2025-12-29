@@ -47,22 +47,79 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
     const playerOvr = player.attributes ? calculateOVR(player.attributes, player.pos) : player.overall;
     const ovrGrade = getBenchmarkGrade(playerOvr, 99);
 
+    // Dynamic Tier Styling
+    let tierStyle = {
+        name: 'Prospect',
+        bg: 'bg-black',
+        border: 'border-white/10',
+        glow: '',
+        text: 'text-white/50',
+        badge: 'bg-black text-white/50 border-white/20'
+    };
+
+    if (playerOvr >= 90) {
+        tierStyle = {
+            name: 'LEGEND',
+            bg: 'bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black',
+            border: 'border-white',
+            glow: 'shadow-[0_0_50px_rgba(255,255,255,0.6)] animate-pulse-slow',
+            text: 'text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 animate-gradient-xy',
+            badge: 'bg-black text-white border-white shadow-[0_0_15px_rgba(255,255,255,0.8)]'
+        };
+    } else if (playerOvr >= 80) {
+        tierStyle = {
+            name: 'SUPERSTAR',
+            bg: 'bg-gradient-to-br from-yellow-600 via-amber-500 to-yellow-800',
+            border: 'border-yellow-400',
+            glow: 'shadow-[0_0_30px_rgba(234,179,8,0.5)]',
+            text: 'text-yellow-100 drop-shadow-md',
+            badge: 'bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-bold border-yellow-300'
+        };
+    } else if (playerOvr >= 70) {
+        tierStyle = {
+            name: 'ALL-STAR',
+            bg: 'bg-gradient-to-br from-gray-400 via-gray-300 to-gray-500',
+            border: 'border-gray-200',
+            glow: 'shadow-[0_0_20px_rgba(255,255,255,0.4)]',
+            text: 'text-white drop-shadow',
+            badge: 'bg-gradient-to-r from-gray-300 to-gray-400 text-black font-bold border-white'
+        };
+    } else if (playerOvr >= 60) {
+        tierStyle = {
+            name: 'STARTER',
+            bg: 'bg-gradient-to-br from-orange-900 via-amber-800 to-orange-950',
+            border: 'border-orange-700',
+            glow: 'shadow-[0_0_15px_rgba(154,52,18,0.3)]',
+            text: 'text-orange-100',
+            badge: 'bg-orange-900 text-orange-200 border-orange-700'
+        };
+    }
+
+    // Use primary color only if not in a high tier overrides, OR blend it?
+    // User requested specific backgrounds, so we prioritize the Tier BG.
+    // However, the "accent" line at top currently uses primaryColor.
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" onClick={onClose}>
             {/* Main Container - "NBA 2K" Style */}
             <div
-                className="relative w-full max-w-5xl bg-[#121212] rounded-none shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+                className={`relative w-full max-w-5xl bg-[#121212] rounded-none shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border-t-4 transition-all duration-500 ${tierStyle.glow}`}
                 onClick={e => e.stopPropagation()}
-                style={{ borderTop: `4px solid ${primaryColor}` }}
+                style={{ borderColor: playerOvr >= 80 ? '' : primaryColor }} // Let Tier Color override if high tier? Or keep Team Color? User said "Black Diamond... glowing". Let's use class for high tiers.
             >
 
                 {/* 1. Header Section - The "Player Card" look */}
-                <div className="relative h-48 w-full overflow-hidden shrink-0">
-                    {/* Background Gradient using Team Color */}
-                    <div
-                        className="absolute inset-0 opacity-20"
-                        style={{ background: `linear-gradient(to right, #000 0%, ${primaryColor} 50%, #000 100%)` }}
-                    ></div>
+                <div className={`relative h-48 w-full overflow-hidden shrink-0 ${tierStyle.bg}`}>
+                    {/* Overlay for shimmer effects */}
+                    {playerOvr >= 80 && <div className="absolute inset-0 animate-shimmer"></div>}
+
+                    {/* Background Gradient using Team Color (Only for lower tiers or blend?) */}
+                    {playerOvr < 80 && (
+                        <div
+                            className="absolute inset-0 opacity-40 mix-blend-overlay"
+                            style={{ background: `linear-gradient(to right, #000 0%, ${primaryColor} 50%, #000 100%)` }}
+                        ></div>
+                    )}
 
                     <div className="relative z-10 h-full flex items-center justify-between px-10">
                         {/* LEFT: Jersey Number (Big, Watermark style) */}
@@ -99,10 +156,10 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                         </div>
 
                         {/* RIGHT: OVR Ring */}
-                        <div className="flex flex-col items-center justify-center">
-                            <div className="relative w-24 h-24 flex items-center justify-center rounded-full border-[6px]" style={{ borderColor: primaryColor, backgroundColor: '#000' }}>
-                                <span className="text-4xl font-black text-white">{playerOvr}</span>
-                                <span className="absolute -top-3 bg-black px-2 text-xs font-bold text-white uppercase tracking-wider">OVR</span>
+                        <div className="flex flex-col items-center justify-center relative z-10">
+                            <div className={`relative w-24 h-24 flex items-center justify-center rounded-full border-[6px] ${tierStyle.bg} ${tierStyle.border} ${tierStyle.glow}`} style={playerOvr < 80 ? { borderColor: primaryColor, backgroundColor: '#000' } : {}}>
+                                <span className={`text-4xl font-black ${tierStyle.text}`}>{playerOvr}</span>
+                                <span className={`absolute -top-3 px-2 text-xs font-bold uppercase tracking-wider rounded ${tierStyle.badge}`}>OVR</span>
                             </div>
                         </div>
                     </div>
@@ -160,6 +217,7 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                                                 { label: 'PPG', val: player.ppg, benchmark: 'ppg' },
                                                 { label: 'RPG', val: player.rpg, benchmark: 'rpg' },
                                                 { label: 'APG', val: player.apg, benchmark: 'apg' },
+                                                { label: 'MPG', val: player.mpg, benchmark: 'mpg' },
                                                 { label: 'SPG', val: player.spg, benchmark: 'spg' },
                                                 { label: 'BPG', val: player.bpg, benchmark: 'bpg' },
                                                 { label: 'FG%', val: player.fgPct, benchmark: 'fgPct', isPercentage: true },
@@ -173,7 +231,7 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                                                         {stat.isPercentage ? `${stat.val}%` : stat.val}
                                                     </td>
                                                     <td className="p-3">
-                                                        <GradeBadge grade={getBenchmarkGrade(stat.val as number, getStatBenchmark(stat.benchmark as any), stat.lowerIsBetter || false)} />
+                                                        <GradeBadge grade={getBenchmarkGrade(stat.val as number, getStatBenchmark(stat.benchmark as any), stat.lowerIsBetter || false, stat.benchmark, player.fta)} />
                                                     </td>
                                                     <td className="p-3 text-white/30">-</td>
                                                 </tr>
@@ -259,13 +317,26 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
 
                 </div>
 
-                {/* Close Button */}
-                <button
-                    onClick={onClose}
-                    className="absolute top-4 right-4 text-white/20 hover:text-white transition-colors text-2xl font-bold w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10"
-                >
-                    &times;
-                </button>
+                {/* Action Buttons: Close & Share */}
+                <div className="absolute top-4 right-4 flex items-center gap-2">
+                    <button
+                        onClick={() => {
+                            const text = `Check out ${player.name} (${playerOvr} OVR) on EDG League!\n${player.ppg} PPG | ${player.rpg} RPG | ${player.apg} APG`;
+                            navigator.clipboard.writeText(text);
+                            alert("Player stats copied to clipboard!");
+                        }}
+                        className="text-white/20 hover:text-primary transition-colors text-xl font-bold w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10"
+                        title="Share Player"
+                    >
+                        <i className="ph ph-share-network"></i>
+                    </button>
+                    <button
+                        onClick={onClose}
+                        className="text-white/20 hover:text-white transition-colors text-2xl font-bold w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10"
+                    >
+                        &times;
+                    </button>
+                </div>
 
                 {/* Admin Only Edit Button */}
                 {session?.user?.role === 'ADMIN' && (

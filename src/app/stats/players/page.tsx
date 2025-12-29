@@ -5,6 +5,7 @@ import { TEAMS } from '@/lib/data';
 import { PlayerProfileModal } from '@/components/PlayerProfileModal';
 import type { Player } from '@/lib/data';
 import { calculateOVR } from '@/lib/rating';
+import { CaretUp, CaretDown, CaretUpDown } from '@phosphor-icons/react';
 
 export default function PlayersStatsPage() {
     const [playerSearch, setPlayerSearch] = useState('');
@@ -22,15 +23,25 @@ export default function PlayersStatsPage() {
     };
 
     const sortPlayers = (column: string) => {
-        setPlayerSort(currentSort => {
-            if (currentSort.column === column) {
-                return { ...currentSort, direction: currentSort.direction === 'asc' ? 'desc' : 'asc' };
+        setPlayerSort(prev => {
+            if (prev.column === column) {
+                return {
+                    ...prev,
+                    direction: prev.direction === 'asc' ? 'desc' : 'asc'
+                };
             }
-            return { column, direction: (['name', 'team', 'pos'].includes(column) ? 'asc' : 'desc') as 'asc' | 'desc' };
+            const isStringCol = ['name', 'team', 'pos'].includes(column);
+            return {
+                column,
+                direction: isStringCol ? 'asc' : 'desc'
+            };
         });
     };
 
     const filteredPlayers = useMemo(() => {
+        // Define Position Order
+        const posOrder = { 'PG': 1, 'SG': 2, 'SF': 3, 'PF': 4, 'C': 5 };
+
         return allPlayers
             .filter(p => {
                 const search = playerSearch.toLowerCase();
@@ -39,21 +50,50 @@ export default function PlayersStatsPage() {
                 return matchesName && matchesPos;
             })
             .sort((a, b) => {
-                let valA = playerSort.column === 'overall' ? getPlayerOVR(a) : a[playerSort.column as keyof typeof a];
-                let valB = playerSort.column === 'overall' ? getPlayerOVR(b) : b[playerSort.column as keyof typeof b];
+                const col = playerSort.column;
+                let valA: any = a[col as keyof typeof a];
+                let valB: any = b[col as keyof typeof b];
 
+                // Special Case: Overall (calculated)
+                if (col === 'overall') {
+                    valA = getPlayerOVR(a);
+                    valB = getPlayerOVR(b);
+                }
+
+                // Special Case: Position Check
+                if (col === 'pos') {
+                    valA = posOrder[a.pos as keyof typeof posOrder] || 99;
+                    valB = posOrder[b.pos as keyof typeof posOrder] || 99;
+                }
+
+                // Handle null/undefined
                 if (valA === null || valA === undefined) return 1;
                 if (valB === null || valB === undefined) return -1;
+
+                // Force numeric conversion for stat columns
+                const isNumericCol = !['name', 'team', 'pos', 'injury', 'status'].includes(col);
+                if (isNumericCol) {
+                    valA = Number(valA);
+                    valB = Number(valB);
+                }
 
                 if (typeof valA === 'string' && typeof valB === 'string') {
                     valA = valA.toLowerCase();
                     valB = valB.toLowerCase();
                 }
+
                 if (valA < valB) return playerSort.direction === 'asc' ? -1 : 1;
                 if (valA > valB) return playerSort.direction === 'asc' ? 1 : -1;
                 return 0;
             });
     }, [allPlayers, playerSearch, positionFilter, playerSort]);
+
+    const getSortIcon = (column: string) => {
+        if (playerSort.column !== column) return <CaretUpDown className="opacity-20 ml-1 inline-block" size={16} />;
+        return playerSort.direction === 'asc'
+            ? <CaretUp className="text-primary ml-1 inline-block" size={16} weight="fill" />
+            : <CaretDown className="text-primary ml-1 inline-block" size={16} weight="fill" />;
+    };
 
     return (
         <section className="container mx-auto px-5 py-8 min-h-screen">
@@ -87,19 +127,19 @@ export default function PlayersStatsPage() {
                 <table className="stats-table">
                     <thead>
                         <tr>
-                            <th onClick={() => sortPlayers('name')} className="th-cell sortable">PLAYER</th>
-                            <th onClick={() => sortPlayers('team')} className="th-cell sortable">TEAM</th>
-                            <th onClick={() => sortPlayers('pos')} className="th-cell sortable">POS</th>
-                            <th onClick={() => sortPlayers('overall')} className="th-cell sortable">OVR</th>
-                            <th onClick={() => sortPlayers('ppg')} className="th-cell sortable">PPG</th>
-                            <th onClick={() => sortPlayers('rpg')} className="th-cell sortable">RPG</th>
-                            <th onClick={() => sortPlayers('apg')} className="th-cell sortable">APG</th>
-                            <th onClick={() => sortPlayers('spg')} className="th-cell sortable">SPG</th>
-                            <th onClick={() => sortPlayers('bpg')} className="th-cell sortable">BPG</th>
-                            <th onClick={() => sortPlayers('fgPct')} className="th-cell sortable">FG%</th>
-                            <th onClick={() => sortPlayers('threePtPct')} className="th-cell sortable">3P%</th>
-                            <th onClick={() => sortPlayers('ftPct')} className="th-cell sortable">FT%</th>
-                            <th onClick={() => sortPlayers('tov')} className="th-cell sortable">TOV</th>
+                            <th onClick={() => sortPlayers('name')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">PLAYER {getSortIcon('name')}</th>
+                            <th onClick={() => sortPlayers('team')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">TEAM {getSortIcon('team')}</th>
+                            <th onClick={() => sortPlayers('pos')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">POS {getSortIcon('pos')}</th>
+                            <th onClick={() => sortPlayers('overall')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">OVR {getSortIcon('overall')}</th>
+                            <th onClick={() => sortPlayers('ppg')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">PPG {getSortIcon('ppg')}</th>
+                            <th onClick={() => sortPlayers('rpg')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">RPG {getSortIcon('rpg')}</th>
+                            <th onClick={() => sortPlayers('apg')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">APG {getSortIcon('apg')}</th>
+                            <th onClick={() => sortPlayers('spg')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">SPG {getSortIcon('spg')}</th>
+                            <th onClick={() => sortPlayers('bpg')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">BPG {getSortIcon('bpg')}</th>
+                            <th onClick={() => sortPlayers('fgPct')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">FG% {getSortIcon('fgPct')}</th>
+                            <th onClick={() => sortPlayers('threePtPct')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">3P% {getSortIcon('threePtPct')}</th>
+                            <th onClick={() => sortPlayers('ftPct')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">FT% {getSortIcon('ftPct')}</th>
+                            <th onClick={() => sortPlayers('tov')} className="th-cell sortable cursor-pointer hover:text-primary transition-colors">TOV {getSortIcon('tov')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,7 +153,7 @@ export default function PlayersStatsPage() {
                                 </td>
                                 <td className="td-cell text-muted-foreground text-sm">{p.team}</td>
                                 <td className="td-cell">{p.pos}</td>
-                                <td className="td-cell text-accent font-bold text-lg">{getPlayerOVR(p)}</td>
+                                <td className="td-cell font-bold text-lg text-white">{getPlayerOVR(p)}</td>
                                 <td className="td-cell">{p.ppg}</td>
                                 <td className="td-cell">{p.rpg}</td>
                                 <td className="td-cell">{p.apg}</td>

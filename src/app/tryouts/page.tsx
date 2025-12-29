@@ -1,110 +1,71 @@
-
-import React from 'react';
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function TryoutsPage() {
     return (
-        <section id="tryouts" className="content-section">
-            <h2 className="section-title">
-                OPEN RUN TRYOUTS <span className="section-title-tag">CLASS OF 2026</span>
-            </h2>
+        <main className="min-h-screen pt-32 pb-12 px-6 bg-black text-white">
+            <div className="max-w-7xl mx-auto space-y-16">
 
-            <div className="grid md:grid-cols-2 gap-10">
-                <div>
-                    <h3 className="text-3xl font-head mb-5">EARN YOUR SPOT</h3>
-                    <p className="text-foreground/80 mb-5 leading-relaxed">
-                        The road to the EDG Sports League starts here. We are scouting for
-                        the 2026 season. Think you have what it takes to compete with
-                        Philly's best? Show up, ball out, and get signed.
+                {/* Hero */}
+                <div className="text-center space-y-6">
+                    <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-r from-edg-red to-white">
+                        THE COMBINE
+                    </h1>
+                    <p className="text-2xl text-gray-400 font-light max-w-3xl mx-auto">
+                        Showcase your skills. Get evaluated. Earn your spot in the draft.
                     </p>
-                    <ul className="list-none p-0 mb-7 text-foreground/90 space-y-2">
-                        <li className="flex items-center gap-2.5"><i className="ph-fill ph-calendar-check text-accent"></i> Next Session: Saturday, May 10th</li>
-                        <li className="flex items-center gap-2.5"><i className="ph-fill ph-map-pin text-accent"></i> Location: The Main Gym (North Philly)</li>
-                        <li className="flex items-center gap-2.5"><i className="ph-fill ph-money text-accent"></i> Registration Fee: $20 (Cashless Only)</li>
-                    </ul>
-                    <div className="cashless-banner text-left p-4 mb-5 text-sm">
-                        <span>*Tryout registration fee guarantees 3 games and a reversible jersey.</span>
-                    </div>
-
-                    <div className="disclaimer-box">
-                        <h4 className="font-head text-lg mb-2.5">SEASON CONTRACT DISCLAIMER</h4>
-                        <p className="text-sm text-foreground/80 leading-relaxed mb-2.5">
-                            <strong>Once a player is selected (drafted) by a coach:</strong> The
-                            player pays a registration fee for the season equal to{' '}
-                            <strong>$35 per game</strong> on a 40 game season. Full team
-                            uniforms are <strong>$250</strong>.
-                        </p>
-                        <p className="text-sm text-foreground/80 leading-relaxed mb-2.5">
-                            Must be paid in full to <strong>EDG Sports League</strong>. No
-                            payments are made to any staff or affiliates whatsoever.
-                        </p>
-                        <p className="text-sm text-foreground/80 leading-relaxed">
-                            <strong>Compensation:</strong> Players are compensated for every
-                            game played with <strong>50 bonus</strong> for games won.
-                            Payments are through Cash App, Venmo, or Zelle.
-                        </p>
-                    </div>
                 </div>
 
-                <div className="bg-secondary p-8 border border-border rounded-lg">
-                    <h4 className="subsection-title mb-5">PLAYER REGISTRATION</h4>
-                    <form>
-                        <div className="grid grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <label className="form-label">First Name</label>
-                                <input type="text" className="search-input w-full" />
-                            </div>
-                            <div>
-                                <label className="form-label">Last Name</label>
-                                <input type="text" className="search-input w-full" />
-                            </div>
-                        </div>
+                {/* Details Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                        <div className="grid grid-cols-3 gap-4 mb-4">
-                            <div>
-                                <label className="form-label">Height</label>
-                                <input type="text" className="search-input w-full" placeholder="e.g. 6'4" />
-                            </div>
-                            <div>
-                                <label className="form-label">Weight</label>
-                                <input type="text" className="search-input w-full" placeholder="lbs" />
-                            </div>
-                            <div>
-                                <label className="form-label">Age</label>
-                                <input type="number" className="search-input w-full" />
-                            </div>
-                        </div>
+                    {/* Access */}
+                    <div className="bg-zinc-900/50 p-8 rounded-xl border border-white/10 space-y-4">
+                        <h3 className="text-xl font-bold italic uppercase tracking-wider text-edg-red">Access & Format</h3>
+                        <ul className="space-y-3 text-gray-300">
+                            <li>• <span className="text-white font-bold">20 Sessions</span> available this summer.</li>
+                            <li>• Limited to <span className="text-white font-bold">40 Participants</span> per session.</li>
+                            <li>• Full 5v5 Scrimmages & Skill Drills.</li>
+                            <li>• Live Streamed & Recorded for Scouting.</li>
+                        </ul>
+                    </div>
 
-                        <div className="mb-4">
-                            <label className="form-label">Primary Position</label>
-                            <select className="filter-select w-full">
-                                <option>Point Guard</option>
-                                <option>Shooting Guard</option>
-                                <option>Small Forward</option>
-                                <option>Power Forward</option>
-                                <option>Center</option>
-                            </select>
-                        </div>
+                    {/* Perks */}
+                    <div className="bg-zinc-900/50 p-8 rounded-xl border border-white/10 space-y-4">
+                        <h3 className="text-xl font-bold italic uppercase tracking-wider text-edg-red">Included Perks</h3>
+                        <ul className="space-y-3 text-gray-300">
+                            <li>• Official EDG Combine T-Shirt (Keeper).</li>
+                            <li>• Water, Gatorade & Snacks provided.</li>
+                            <li>• Certified Referee Officiating.</li>
+                            <li>• Post-game Stat Packet.</li>
+                        </ul>
+                    </div>
 
-                        <div className="mb-4">
-                            <label className="form-label">Highest Level Played</label>
-                            <select className="filter-select w-full">
-                                <option>High School Varsity</option>
-                                <option>College (D1/D2/D3)</option>
-                                <option>Overseas / Pro</option>
-                                <option>Streetball / Rec</option>
-                            </select>
-                        </div>
+                    {/* Cost */}
+                    <div className="bg-zinc-900/50 p-8 rounded-xl border border-white/10 space-y-4 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-edg-red blur-3xl opacity-20"></div>
+                        <h3 className="text-xl font-bold italic uppercase tracking-wider text-edg-red">Registration</h3>
+                        <div className="text-4xl font-black text-white">$75.00</div>
+                        <p className="text-gray-400 text-sm">One-time fee covers facility, gear, and media coverage.</p>
 
-                        <div className="mb-5">
-                            <label className="form-label">Email Address</label>
-                            <input type="email" className="search-input w-full" />
-                        </div>
+                        <Link href="/register" className="block pt-4">
+                            <Button className="w-full bg-edg-red hover:bg-red-700 text-white font-bold py-6 text-xl italic uppercase tracking-widest transition-transform hover:scale-105 shadow-xl">
+                                Secure Your Spot
+                            </Button>
+                        </Link>
+                    </div>
 
-                        <button className="btn w-full">REGISTER NOW ($20)</button>
-                        <p className="text-center text-muted-foreground/50 text-xs mt-2.5">Secure payment via Stripe/Square at next step.</p>
-                    </form>
                 </div>
+
+                {/* Media Notice */}
+                <div className="text-center bg-white/5 p-8 rounded-xl border border-white/5">
+                    <h3 className="text-lg font-bold text-white mb-2 uppercase tracking-wide">Media Notice</h3>
+                    <p className="text-gray-400 max-w-2xl mx-auto text-sm">
+                        All combine sessions are broadcast live on EDG Network. By registering, you consent to being filmed and having your likeness used for league promotion and scouting database purposes.
+                    </p>
+                </div>
+
             </div>
-        </section>
+        </main>
     );
 }

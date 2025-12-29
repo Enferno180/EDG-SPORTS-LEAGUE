@@ -1,4 +1,5 @@
-import React from 'react'; // useState is removed, but React might still be needed for JSX
+
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { auth, signOut } from '@/auth';
@@ -6,24 +7,6 @@ import { NavDropdown } from '@/components/NavDropdown';
 
 export async function Header() {
     const session = await auth();
-    // isMobileMenuOpen state and setIsMobileMenuOpen are removed as Header is now a Server Component.
-    // The mobile menu functionality needs to be extracted into a separate Client Component
-    // that will manage its own state and be imported here.
-    // For the purpose of this single file edit, the mobile menu toggle and display logic
-    // will be commented out or removed, as it cannot function without client-side state.
-    // A follow-up step would be to create a dedicated client component for the mobile navigation.
-
-    // Consolidated Links - Critical League Info Only
-    const navLinks = [
-        { name: 'HOME', href: '/' },
-        { name: 'STANDINGS', href: '/stats/standings' },
-        { name: 'PLAYER STATS', href: '/stats/players' },
-        { name: 'TEAM STATS', href: '/stats/teams' },
-        { name: 'LEADERS', href: '/stats/leaders' },
-        { name: 'INJURIES', href: '/stats/injuries' },
-        { name: 'SCHEDULE', href: '/schedule' },
-        { name: 'MEDIA', href: '/media' },
-    ];
 
     return (
         <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10 py-3">
@@ -44,31 +27,54 @@ export async function Header() {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden lg:flex items-center gap-8">
-                    <Link href="/stats/standings" className="text-1xl font-bold italic tracking-tighter text-muted-foreground hover:text-primary transition-colors">STANDINGS</Link>
-                    <Link href="/schedule" className="text-1xl font-bold italic tracking-tighter text-muted-foreground hover:text-primary transition-colors">SCHEDULE</Link>
 
-                    {/* PLAYERS Dropdown */}
+                    {/* STATS Dropdown */}
                     <NavDropdown
-                        title="PLAYERS"
+                        title="STATS"
                         items={[
                             { label: 'Player Stats', href: '/stats/players' },
                             { label: 'League Leaders', href: '/stats/leaders' },
                             { label: 'Injury Report', href: '/stats/injuries' },
-                            { label: 'Player of the Week', href: '/stats/player-of-the-week' }
                         ]}
                     />
 
-                    {/* TEAMS Dropdown */}
+                    {/* SCOUTING Dropdown */}
+                    <NavDropdown
+                        title="SCOUTING"
+                        items={[
+                            { label: 'Registration', href: '/register' },
+                            { label: 'Big Board', href: '/draft-board' },
+                            { label: 'Draft Order', href: '/draft-order' },
+                            { label: 'Prospects', href: '/scouting-report' },
+                        ]}
+                    />
+
+                    <Link href="/schedule" className="text-1xl font-bold italic tracking-tighter text-muted-foreground hover:text-primary transition-colors">SCHEDULE</Link>
+
+                    {/* TICKETS Link */}
+                    <Link href="/tickets" className="text-1xl font-bold italic tracking-tighter text-muted-foreground hover:text-primary transition-colors">TICKETS</Link>
+
+                    {/* TEAMS Dropdown (Updated) */}
                     <NavDropdown
                         title="TEAMS"
                         items={[
                             { label: 'Team Stats', href: '/stats/teams' },
+                            { label: 'Standings', href: '/stats/standings' },
+                            { label: 'Power Rankings', href: '/power-rankings' },
                             { label: 'Rosters', href: '/teams/rosters' },
                             { label: 'Starting Lineups', href: '/teams/lineups' }
                         ]}
                     />
 
-                    <Link href="/media" className="text-1xl font-bold italic tracking-tighter text-muted-foreground hover:text-primary transition-colors">MEDIA</Link>
+                    {/* MEDIA Dropdown */}
+                    <NavDropdown
+                        title="MEDIA"
+                        items={[
+                            { label: 'Top 10 Highlights', href: '/media/highlights/top-10' },
+                            { label: 'Player of the Game', href: '/media/highlights/potg' },
+                            { label: 'THE REAL EDG SPORTS PODCAST', href: '/media/podcast' }
+                        ]}
+                    />
                 </nav>
 
                 {/* Auth & Admin - Desktop */}
@@ -101,15 +107,13 @@ export async function Header() {
                     )}
                 </div>
 
-                {/* Mobile Menu Toggle (Placeholder - functionality disabled during refactor) */}
+                {/* Mobile Menu Toggle (Placeholder) */}
                 <button
                     className="lg:hidden text-2xl focus:outline-none text-foreground"
                 >
                     ☰
                 </button>
             </div>
-
-            {/* Mobile Navigation - Temporarily Removed until Client Component refactor */}
         </header>
     );
 }

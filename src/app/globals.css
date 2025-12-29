@@ -16,8 +16,8 @@
     --popover: 240 10% 7%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 47 95% 50%;
-    /* Gold/Amber for high contrast on dark */
+    --primary: 28 95% 52%;
+    /* Basketball Orange */
     --primary-foreground: 240 10% 4%;
 
     --secondary: 240 5% 15%;
@@ -71,6 +71,55 @@
     h5,
     h6 {
         @apply font-head;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    .animate-shimmer {
+        background: linear-gradient(90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0) 100%);
+        background-size: 200% 100%;
+        animation: shimmer 2s infinite;
+    }
+
+    .animate-pulse-fast {
+        animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .bg-size-200 {
+        background-size: 200% 200%;
+    }
+
+    .animate-gradient-xy {
+        animation: gradient-xy 3s ease infinite;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes gradient-xy {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
     }
 }
 

@@ -7,8 +7,9 @@ import { CALENDAR_EVENTS } from '@/lib/data';
 // Main calendar component
 const Calendar = ({ events, selectedDay, setSelectedDay }: { events: any[], selectedDay: number | null, setSelectedDay: (day: number) => void }) => {
     const today = new Date();
-    const currentMonth = today.getMonth();
-    const currentYear = today.getFullYear();
+    // Default to January 2026
+    const currentMonth = 0; // January
+    const currentYear = 2026;
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
@@ -53,7 +54,7 @@ export default function SchedulePage() {
                 <h2 className="section-title">SCHEDULE & EVENTS</h2>
                 <div className="flex gap-2">
                     <button className="btn btn-secondary">PREV</button>
-                    <div className="calendar-month-display">APRIL 2025</div>
+                    <div className="calendar-month-display">JANUARY 2026</div>
                     <button className="btn btn-secondary">NEXT</button>
                 </div>
             </div>

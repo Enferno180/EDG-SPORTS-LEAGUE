@@ -10,21 +10,25 @@ export default function Home() {
             <section className="container mx-auto px-0 md:px-5 py-6">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-                    {/* Main Hero Article (8 cols) */}
-                    <div className="lg:col-span-8 group cursor-pointer relative">
-                        <div className="relative aspect-[16/9] overflow-hidden bg-black rounded-sm border border-white/10 shadow-sm">
-                            <img
-                                src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=2090&auto=format&fit=crop"
-                                alt="Main Story"
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
-                            />
+                    {/* Main Hero Article (8 cols) - REPLACED WITH VIDEO PLAYER */}
+                    <div className="lg:col-span-8 group relative bg-black rounded-sm border border-white/10 shadow-sm overflow-hidden">
+                        <div className="relative aspect-[16/9] w-full">
+                            <iframe
+                                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
+                                src="https://www.youtube.com/embed/M7T9x4S9s70?autoplay=1&mute=1&controls=0&loop=1&playlist=M7T9x4S9s70&start=10"
+                                title="EDG Game of the Week"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                            ></iframe>
+
                             {/* Gradient Overlay for Text */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-6 md:p-8">
-                                <span className="bg-primary text-black text-xs font-bold px-2 py-1 mb-3 w-fit uppercase tracking-wider">Playoffs</span>
-                                <h1 className="text-3xl md:text-5xl font-head font-black text-white leading-[0.9] mb-2 uppercase italic">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none flex flex-col justify-end p-6 md:p-8">
+                                <span className="bg-primary text-black text-xs font-bold px-2 py-1 mb-3 w-fit uppercase tracking-wider">Game of the Week</span>
+                                <h1 className="text-3xl md:text-5xl font-head font-black text-white leading-[0.9] mb-2 uppercase italic drop-shadow-md">
                                     THE TAKEOVER HAS ARRIVED
                                 </h1>
-                                <p className="text-gray-300 text-lg md:text-xl font-medium max-w-2xl line-clamp-2">
+                                <p className="text-gray-300 text-lg md:text-xl font-medium max-w-2xl line-clamp-2 drop-shadow-sm">
                                     EDG Sports League redefines the professional ecosystem with a fatal four playoff format.
                                 </p>
                             </div>
