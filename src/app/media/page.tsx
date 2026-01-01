@@ -33,7 +33,7 @@ export default function MediaPage() {
                         <div className="media-card">
                             <div className="media-thumb"><div className="play-btn">▶</div></div>
                             <div className="p-4">
-                                <h4 className="mb-1">Game Winner: Vipers vs Bulls</h4>
+                                <h4 className="mb-1">Game Winner: Venom vs Bulls</h4>
                                 <p className="text-muted-foreground text-sm">Last second shot seals the deal.</p>
                             </div>
                         </div>

@@ -47,6 +47,8 @@
     --color-game: hsl(25 92% 46%);
     --color-practice: hsl(200 80% 50%);
     --color-media: hsl(280 60% 60%);
+    --color-fashion: #E0115F;
+    /* Ruby Red */
 
     /* Status Colors */
     --status-active: #10b981;

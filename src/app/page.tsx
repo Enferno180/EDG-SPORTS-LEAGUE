@@ -13,14 +13,11 @@ export default function Home() {
                     {/* Main Hero Article (8 cols) - REPLACED WITH VIDEO PLAYER */}
                     <div className="lg:col-span-8 group relative bg-black rounded-sm border border-white/10 shadow-sm overflow-hidden">
                         <div className="relative aspect-[16/9] w-full">
-                            <iframe
+                            <img
                                 className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
-                                src="https://www.youtube.com/embed/M7T9x4S9s70?autoplay=1&mute=1&controls=0&loop=1&playlist=M7T9x4S9s70&start=10"
-                                title="EDG Game of the Week"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                            ></iframe>
+                                src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=2070&auto=format&fit=crop"
+                                alt="EDG Game of the Week"
+                            />
 
                             {/* Gradient Overlay for Text */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none flex flex-col justify-end p-6 md:p-8">
@@ -45,11 +42,11 @@ export default function Home() {
                         {/* News List Items */}
                         <div className="divide-y divide-border/50">
                             {[
-                                { title: "RUST BUCKET WINS MVP", time: "2h ago", cat: "AWARDS" },
-                                { title: "DIVISION STANDINGS SHAKEUP", time: "4h ago", cat: "STANDINGS" },
-                                { title: "WEEK 30 POWER RANKINGS", time: "6h ago", cat: "ANALYSIS" },
-                                { title: "INJURY REPORT: BIG MIKE OUT", time: "8h ago", cat: "INJURIES" },
-                                { title: "RECRUITING: NEXT GEN TALENT", time: "12h ago", cat: "TRYOUTS" },
+                                { title: "THE REAL EDG PODCAST: EP 1", time: "OUT NOW", cat: "MEDIA" },
+                                { title: "JOB ALERT: HOSTS & COMMENTATORS", time: "APPLY NOW", cat: "CAREERS" },
+                                { title: "SNEAKER WATCH: RELEASE RADAR", time: "UPDATED", cat: "FASHION" },
+                                { title: "COMMUNITY: GIVING BACK", time: "WEEKEND", cat: "OUTREACH" },
+                                { title: "2026 COMBINE REGISTRATION", time: "OPEN", cat: "TRYOUTS" },
                             ].map((item, i) => (
                                 <Link key={i} href="#" className="flex gap-4 p-4 hover:bg-white/5 transition-colors group">
                                     <div className="flex-1">
@@ -87,10 +84,10 @@ export default function Home() {
                     </Link>
                     <div className="h-8 w-px bg-border/50"></div>
                     <Link href="/stats/leaders" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold">32.4</div>
+                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold">27.2</div>
                         <div>
                             <div className="text-xs font-bold text-muted-foreground uppercase">SCORING LEADER</div>
-                            <div className="font-head font-bold text-lg text-foreground leading-none group-hover:text-primary transition-colors">A. IVERSON</div>
+                            <div className="font-head font-bold text-lg text-foreground leading-none group-hover:text-primary transition-colors">N. ALLEN</div>
                         </div>
                     </Link>
                     <div className="h-8 w-px bg-border/50"></div>
@@ -116,28 +113,27 @@ export default function Home() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {[
-                        { id: 1, title: "The Fatal Four: Why the #1 Seed is key", img: "https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=600&auto=format&fit=crop" },
-                        { id: 2, title: "Inside the Scouting Combine", img: "https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=600&auto=format&fit=crop" },
-                        { id: 3, title: "Season Ticket Holder Benefits", img: "https://images.unsplash.com/photo-1453396450673-3fe83d2db2c4?q=80&w=600&auto=format&fit=crop" },
-                        { id: 4, title: "Community Court Renovation Project", img: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=600&auto=format&fit=crop" }
+                        { id: 1, title: "The Real EDG Sports Podcast: Episode 1 is Live", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=600&auto=format&fit=crop" },
+                        { id: 2, title: "Now Hiring: Podcast Hosts & Game Commentators", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" },
+                        { id: 4, title: "Community Outreach: Events in the City", img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=600&auto=format&fit=crop" }
                     ].map((item) => (
-                        <div key={item.id} className="group cursor-pointer">
+                        <Link href="/sneakers" className="group cursor-pointer block">
                             <div className="aspect-video bg-secondary mb-3 overflow-hidden rounded-sm relative">
                                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors z-10"></div>
                                 <img
-                                    src={item.img}
-                                    alt={item.title}
+                                    src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=600&auto=format&fit=crop"
+                                    alt="Fashion Alert: Upcoming Sneaker Releases"
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
                             </div>
-                            <div className="text-xs font-bold text-primary mb-1 uppercase">Feature</div>
+                            <div className="text-xs font-bold text-primary mb-1 uppercase">Fashion</div>
                             <h3 className="font-head font-bold text-lg text-foreground leading-tight mb-2 group-hover:underline decoration-2 underline-offset-2 decoration-primary">
-                                {item.title}
+                                Sneaker Watch: This Week's Top Releases
                             </h3>
                             <p className="text-sm text-muted-foreground line-clamp-2">
-                                In the EDG league, coming in second puts you in the danger zone. Here is a breakdown of the playoff implications.
+                                We stay fresh on and off the court. Check out our curated list of the hottest upcoming drops.
                             </p>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>
