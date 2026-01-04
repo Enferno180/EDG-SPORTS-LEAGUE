@@ -22,31 +22,24 @@ export async function GET(req: Request) {
                 name: true,
                 email: true,
                 role: true,
-                createdAt: true, // Assuming createdAt exists on User, if not we'll skip or map
                 // Add subscription plan relation check if needed
                 subscriptionPlan: { select: { name: true } }
             }
         });
 
         // CSV Header
-        csvContent = "ID,Name,Email,Role,Subscription,Joined Date\n";
+        csvContent = "ID,Name,Email,Role,Subscription\n";
 
         // CSV Rows
         for (const u of users) {
             // sanitize fields
             const name = (u.name || "").replace(/,/g, " ");
             const sub = (u.subscriptionPlan?.name || "None").replace(/,/g, " ");
-            // User model in schema.prisma didn't have createdAt explicitly shown in previous `cat` but usually does. 
-            // Double check schema. User model has `emailVerified`, `sessions`, etc. 
-            // Let's assume no createdAt on User for now based on previous `view_file` unless I check again. 
-            // Actually, I'll check schema first or just omit it if unsure. 
-            // Looking at previous schema view: User model DOES NOT have createdAt.
-            // I will omit Joined Date to be safe.
+
             csvContent += `${u.id},${name},${u.email},${u.role},${sub}\n`;
         }
 
-        // Correct Header since I removed date
-        csvContent = "ID,Name,Email,Role,Subscription\n" + csvContent.split("\n").slice(1).join("\n");
+        // CSV Content is ready
 
     } else if (type === "orders") {
         filename = `edg_orders_${new Date().toISOString().split('T')[0]}.csv`;

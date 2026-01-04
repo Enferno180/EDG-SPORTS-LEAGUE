@@ -29,7 +29,7 @@ export const config = {
                 // Simple password check for prototype (In production: use bcrypt/argon2)
                 if (user.password !== password) return null;
 
-                return { id: user.id, name: user.name, email: user.email, role: user.role }
+                return { id: user.id, name: user.name, email: user.email, role: user.role as any }
             },
         }),
     ],

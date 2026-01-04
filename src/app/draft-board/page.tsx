@@ -15,6 +15,9 @@ export default async function DraftBoardPage() {
         },
         orderBy: {
             ovr: 'desc'
+        },
+        include: {
+            team: true
         }
     });
 
