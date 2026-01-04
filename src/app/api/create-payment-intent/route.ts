@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
+import { stripe } from '@/lib/stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2023-10-16' as any,
-});
+// No local instantiation
+
 
 const calculateOrderAmount = (items: any) => {
     // Replace this constant with a calculation of the order's amount
@@ -17,6 +16,11 @@ export async function POST(request: Request) {
         const { items } = await request.json();
 
         console.log("Creating payment intent for items:", items);
+
+        if (!stripe) {
+            console.error("Stripe is not configured (STRIPE_SECRET_KEY missing).");
+            return NextResponse.json({ error: "Payment system unavailable" }, { status: 503 });
+        }
 
         // Create a PaymentIntent with the order amount and currency
         const paymentIntent = await stripe.paymentIntents.create({
