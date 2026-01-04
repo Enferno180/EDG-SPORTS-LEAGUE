@@ -5,6 +5,8 @@ import { TEAMS } from '@/lib/data';
 import { PlayerProfileModal } from '@/components/PlayerProfileModal';
 import type { Player } from '@/lib/data';
 
+export const dynamic = 'force-dynamic';
+
 export default function InjuriesPage() {
     const [injurySearch, setInjurySearch] = useState('');
     const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);

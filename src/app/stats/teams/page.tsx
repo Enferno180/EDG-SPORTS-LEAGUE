@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { TEAMS } from '@/lib/data';
 import { CaretUp, CaretDown, CaretUpDown, Trophy, Fire, ShieldCheck, TrendUp } from '@phosphor-icons/react';
 
+export const dynamic = 'force-dynamic';
+
 export default function TeamStatsPage() {
     const [teamSort, setTeamSort] = useState({ column: 'wins', direction: 'desc' as 'asc' | 'desc' });
     const [filterDivision, setFilterDivision] = useState('ALL');
