@@ -4,7 +4,7 @@ export default function TeamsPage() {
     return (
         <ComingSoon
             title="TEAMS"
-            description="Official team rosters, stats, and standings are being finalized for the 2026 Season."
+            subtitle="Official team rosters, stats, and standings are being finalized for the 2026 Season."
         />
     );
 }
