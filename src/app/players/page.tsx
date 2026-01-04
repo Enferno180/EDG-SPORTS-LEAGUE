@@ -4,7 +4,7 @@ export default function PlayersPage() {
     return (
         <ComingSoon
             title="PLAYERS"
-            description="Player profiles, career stats, and scouting reports will be available soon."
+            subtitle="Player profiles, career stats, and scouting reports will be available soon."
         />
     );
 }
