@@ -3,6 +3,7 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+// Chart for Financial Dashboard
 
 export default function RevenuePie({ data }: { data: { name: string, value: number }[] }) {
     // Transform cents to dollars for display
