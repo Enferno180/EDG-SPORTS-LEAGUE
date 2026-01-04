@@ -4,8 +4,10 @@ import React, { useState, useMemo } from 'react';
 import { Player, TEAMS } from '@/lib/data';
 import { calculateOVR } from '@/lib/rating';
 import { getBenchmarkGrade, getStatBenchmark, BenchmarkGrade } from '@/lib/benchmarks';
+import { calculateCombineRating } from '@/lib/combine';
 import { ALL_BADGES } from '@/lib/badges';
 import Badge from './Badge';
+import { PlayerProgression } from './PlayerProgression';
 import { useSession } from "next-auth/react";
 
 const GradeBadge = ({ grade }: { grade: BenchmarkGrade }) => {
@@ -28,7 +30,7 @@ interface PlayerProfileModalProps {
 
 export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileModalProps) {
     const { data: session } = useSession();
-    const [activeTab, setActiveTab] = useState<'stats' | 'attributes' | 'badges'>('stats');
+    const [activeTab, setActiveTab] = useState<'stats' | 'attributes' | 'badges' | 'combine' | 'progression'>('stats');
 
     const computedBadges = useMemo(() => {
         if (!player) return [];
@@ -166,7 +168,7 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                 </div>
 
                 {/* 2. Navigation / Tabs */}
-                <div className="bg-[#1a1a1a] border-b border-white/5 px-8 py-3 flex gap-8 text-sm font-bold tracking-widest uppercase text-white/50">
+                <div className="bg-[#1a1a1a] border-b border-white/5 px-8 py-3 flex gap-8 text-sm font-bold tracking-widest uppercase text-white/50 overflow-x-auto whitespace-nowrap scrollbar-hide">
                     <span
                         className={`cursor-pointer hover:text-white transition-colors ${activeTab === 'stats' ? 'text-white' : ''}`}
                         style={activeTab === 'stats' ? { borderBottom: `2px solid ${primaryColor}` } : {}}
@@ -188,6 +190,21 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                     >
                         Badges
                     </span>
+                    <span
+                        className={`cursor-pointer hover:text-white transition-colors ${activeTab === 'combine' ? 'text-white' : ''}`}
+                        style={activeTab === 'combine' ? { borderBottom: `2px solid ${primaryColor}` } : {}}
+                        onClick={() => setActiveTab('combine')}
+                    >
+                        Combine
+                    </span>
+                    {/* Show Progression only if it exists or for everyone? User said "Player Exclusive". For now show for all to demonstrate. */}
+                    <span
+                        className={`cursor-pointer hover:text-white transition-colors ${activeTab === 'progression' ? 'text-white' : ''}`}
+                        style={activeTab === 'progression' ? { borderBottom: `2px solid ${primaryColor}` } : {}}
+                        onClick={() => setActiveTab('progression')}
+                    >
+                        Progression
+                    </span>
                 </div>
 
                 {/* 3. Content Body - Scrollable */}
@@ -203,43 +220,88 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                                 </div>
 
                                 <div className="bg-[#1a1a1a] rounded border border-white/5 overflow-hidden">
-                                    <table className="w-full text-left">
-                                        <thead style={{ backgroundColor: primaryColor }} className="text-black">
-                                            <tr className="text-xs font-bold uppercase">
-                                                <th className="p-3">Stat</th>
-                                                <th className="p-3">Value</th>
-                                                <th className="p-3">Grade</th>
-                                                <th className="p-3">League Avg</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="text-sm font-medium text-white/80">
-                                            {[
-                                                { label: 'PPG', val: player.ppg, benchmark: 'ppg' },
-                                                { label: 'RPG', val: player.rpg, benchmark: 'rpg' },
-                                                { label: 'APG', val: player.apg, benchmark: 'apg' },
-                                                { label: 'MPG', val: player.mpg, benchmark: 'mpg' },
-                                                { label: 'SPG', val: player.spg, benchmark: 'spg' },
-                                                { label: 'BPG', val: player.bpg, benchmark: 'bpg' },
-                                                { label: 'FG%', val: player.fgPct, benchmark: 'fgPct', isPercentage: true },
-                                                { label: '3P%', val: player.threePtPct, benchmark: 'threePtPct', isPercentage: true },
-                                                { label: 'FT%', val: player.ftPct, benchmark: 'ftPct', isPercentage: true },
-                                                { label: 'TOV', val: player.tov, benchmark: 'tov', lowerIsBetter: true },
-                                            ].map((stat, i) => (
-                                                <tr key={stat.label} className={i % 2 === 0 ? 'bg-white/5' : ''}>
-                                                    <td className="p-3 text-white font-bold">{stat.label}</td>
-                                                    <td className="p-3 text-lg font-head">
-                                                        {stat.isPercentage ? `${stat.val}%` : stat.val}
-                                                    </td>
-                                                    <td className="p-3">
-                                                        <GradeBadge grade={getBenchmarkGrade(stat.val as number, getStatBenchmark(stat.benchmark as any), stat.lowerIsBetter || false, stat.benchmark, player.fta)} />
-                                                    </td>
-                                                    <td className="p-3 text-white/30">-</td>
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left min-w-[300px]">
+                                            <thead style={{ backgroundColor: primaryColor }} className="text-black">
+                                                <tr className="text-xs font-bold uppercase">
+                                                    <th className="p-3">Stat</th>
+                                                    <th className="p-3">Value</th>
+                                                    <th className="p-3">Grade</th>
+                                                    <th className="p-3">League Avg</th>
                                                 </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody className="text-sm font-medium text-white/80">
+                                                {[
+                                                    { label: 'PPG', val: player.ppg, benchmark: 'ppg' },
+                                                    { label: 'RPG', val: player.rpg, benchmark: 'rpg' },
+                                                    { label: 'APG', val: player.apg, benchmark: 'apg' },
+                                                    { label: 'MPG', val: player.mpg, benchmark: 'mpg' },
+                                                    { label: 'SPG', val: player.spg, benchmark: 'spg' },
+                                                    { label: 'BPG', val: player.bpg, benchmark: 'bpg' },
+                                                    { label: 'FG%', val: player.fgPct, benchmark: 'fgPct', isPercentage: true },
+                                                    { label: '3P%', val: player.threePtPct, benchmark: 'threePtPct', isPercentage: true },
+                                                    { label: 'FT%', val: player.ftPct, benchmark: 'ftPct', isPercentage: true },
+                                                    { label: 'TOV', val: player.tov, benchmark: 'tov', lowerIsBetter: true },
+                                                ].map((stat, i) => (
+                                                    <tr key={stat.label} className={i % 2 === 0 ? 'bg-white/5' : ''}>
+                                                        <td className="p-3 text-white font-bold">{stat.label}</td>
+                                                        <td className="p-3 text-lg font-head">
+                                                            {stat.isPercentage ? `${stat.val}%` : stat.val}
+                                                        </td>
+                                                        <td className="p-3">
+                                                            <GradeBadge grade={getBenchmarkGrade(stat.val as number, getStatBenchmark(stat.benchmark as any), stat.lowerIsBetter || false, stat.benchmark, player.fta)} />
+                                                        </td>
+                                                        <td className="p-3 text-white/30">-</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </>
+                        )}
+
+                        {activeTab === 'combine' && (
+                            <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+                                <div className="mb-6 flex items-center justify-between">
+                                    <h3 className="text-xl font-bold text-white uppercase italic tracking-wider">Combine Results</h3>
+                                    <div className="h-0.5 flex-1 bg-white/10 ml-4"></div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    {[
+                                        { label: 'Sprint (Speed)', val: player.drillScoreSpeed, type: 'sprint' },
+                                        { label: 'Max Vertical', val: player.drillScoreVertical, type: 'vertical' },
+                                        { label: 'Agility Lane', val: player.drillScoreAgility, type: 'agility' },
+                                        { label: 'Bench Press', val: player.drillScoreStrength, type: 'strength' },
+                                    ].map((drill) => (
+                                        <div key={drill.label} className="bg-white/5 p-4 rounded border border-white/10 flex justify-between items-center">
+                                            <div>
+                                                <p className="text-xs text-gray-400 uppercase">{drill.label}</p>
+                                                <p className="text-2xl font-black text-white">{drill.val || '--'}</p>
+                                            </div>
+                                            {drill.val && (
+                                                <div className="text-right">
+                                                    <span className="text-xs block text-gray-500 mb-1">Grade</span>
+                                                    <GradeBadge grade={getBenchmarkGrade(calculateCombineRating(drill.val, drill.type as any), 99)} />
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                                <p className="text-xs text-white/30 mt-4 italic">* These results set your baseline Physical Attributes.</p>
+                            </div>
+                        )}
+
+                        {activeTab === 'progression' && (
+                            <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+                                {player.attributes && player.progression ? (
+                                    <PlayerProgression attributes={player.attributes} progression={player.progression} />
+                                ) : (
+                                    <div className="p-8 text-center border border-white/5 rounded bg-white/5">
+                                        <p className="text-white/50">No progression data available for this player.</p>
+                                    </div>
+                                )}
+                            </div>
                         )}
 
                         {activeTab === 'attributes' && (
@@ -249,23 +311,38 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                                     <div className="h-0.5 flex-1 bg-white/10 ml-4"></div>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-x-8 gap-y-4">
-                                    {player.attributes ? Object.entries(player.attributes).map(([key, value]) => (
-                                        <div key={key} className="flex items-center gap-3">
-                                            <span className="w-24 text-xs font-bold text-white/60 uppercase text-right truncate">
-                                                {key.replace(/([A-Z])/g, ' $1').trim()}
-                                            </span>
-                                            <div className="flex-1 h-3 bg-[#0a0a0a] rounded-sm overflow-hidden relative border border-white/5">
-                                                {/* Fill */}
-                                                <div
-                                                    className="h-full relative transition-all duration-500 ease-out"
-                                                    style={{ width: `${value}%`, backgroundColor: value >= 90 ? '#ef4444' : (value >= 80 ? primaryColor : '#555') }}
-                                                ></div>
-                                            </div>
-                                            <span className={`w-8 text-right font-head text-sm ${value >= 90 ? 'text-red-500' : 'text-white'}`}>{value}</span>
+                                {(player.gamesPlayed || 0) < 3 ? (
+                                    <div className="bg-white/5 border border-white/10 border-dashed rounded-lg p-12 text-center">
+                                        <div className="text-4xl mb-4">🔒</div>
+                                        <h4 className="text-xl font-bold text-white uppercase mb-2">Proving Ground</h4>
+                                        <p className="text-white/50 max-w-md mx-auto">
+                                            Attributes are hidden until you have completed <span className="text-edg-red font-bold">3 League Games</span>.
+                                            Show us what you got on the court first.
+                                        </p>
+                                        <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-black rounded border border-white/20">
+                                            <span className="text-xs font-bold text-gray-400 uppercase">Current Progress</span>
+                                            <span className="text-white font-mono font-bold">{player.gamesPlayed || 0}/3 Games</span>
                                         </div>
-                                    )) : <p className="text-white/50 text-sm">No attributes available.</p>}
-                                </div>
+                                    </div>
+                                ) : (
+                                    <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                                        {player.attributes ? Object.entries(player.attributes).map(([key, value]) => (
+                                            <div key={key} className="flex items-center gap-3">
+                                                <span className="w-24 text-xs font-bold text-white/60 uppercase text-right truncate">
+                                                    {key.replace(/([A-Z])/g, ' $1').trim()}
+                                                </span>
+                                                <div className="flex-1 h-3 bg-[#0a0a0a] rounded-sm overflow-hidden relative border border-white/5">
+                                                    {/* Fill */}
+                                                    <div
+                                                        className="h-full relative transition-all duration-500 ease-out"
+                                                        style={{ width: `${value}%`, backgroundColor: value >= 90 ? '#ef4444' : (value >= 80 ? primaryColor : '#555') }}
+                                                    ></div>
+                                                </div>
+                                                <span className={`w-8 text-right font-head text-sm ${value >= 90 ? 'text-red-500' : 'text-white'}`}>{value}</span>
+                                            </div>
+                                        )) : <p className="text-white/50 text-sm">No attributes available.</p>}
+                                    </div>
+                                )}
                             </div>
                         )}
 
@@ -275,31 +352,33 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                                     <h3 className="text-xl font-bold text-white uppercase italic tracking-wider">Acquired Badges</h3>
                                     <div className="h-0.5 flex-1 bg-white/10 ml-4"></div>
                                 </div>
-                                <div className="flex flex-wrap gap-4">
-                                    {(() => {
-                                        // 1. Get Hardcoded Badges
-                                        const hardcodedBadges = player.badges || [];
 
-                                        // 2. Calculate Dynamic Badges based on Attributes/Stats
-                                        // Import ALL_BADGES at top or use from context if available, assuming it is imported in this file?
-                                        // It wasn't imported in previous view, need to ensure import.
-                                        // But wait, I can't import ALL_BADGES inside JSX. I must do it outside.
-                                        // I'll assume I need to add the import at the top of the file in a separate step if it's missing.
-                                        // For this step, I will replace the rendering logic to use a 'allPlayerBadges' variable calculated before return.
-                                        return (hardcodedBadges.length > 0 || computedBadges.length > 0) ? (
-                                            [...hardcodedBadges, ...computedBadges]
-                                                // Deduplicate by name
-                                                .filter((b, i, self) => i === self.findIndex((t) => t.name === b.name))
-                                                .map((badge) => (
-                                                    <Badge key={badge.name} badgeId={badge.name} size="md" />
-                                                ))
-                                        ) : (
-                                            <div className="p-8 w-full text-center border border-white/5 rounded bg-white/5">
-                                                <span className="text-white/30 text-lg italic">No badges equipped.</span>
-                                            </div>
-                                        )
-                                    })()}
-                                </div>
+                                {(player.gamesPlayed || 0) < 3 ? (
+                                    <div className="bg-white/5 border border-white/10 border-dashed rounded-lg p-12 text-center">
+                                        <div className="text-4xl mb-4">🔒</div>
+                                        <h4 className="text-xl font-bold text-white uppercase mb-2">Locked</h4>
+                                        <p className="text-white/50">
+                                            Badges are earned, not given. Complete <span className="text-edg-red font-bold">3 League Games</span> to unlock your badge potential.
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-wrap gap-4">
+                                        {(() => {
+                                            const hardcodedBadges = player.badges || [];
+                                            return (hardcodedBadges.length > 0 || computedBadges.length > 0) ? (
+                                                [...hardcodedBadges, ...computedBadges]
+                                                    .filter((b, i, self) => i === self.findIndex((t) => t.name === b.name))
+                                                    .map((badge) => (
+                                                        <Badge key={badge.name} badgeId={badge.name} size="md" />
+                                                    ))
+                                            ) : (
+                                                <div className="p-8 w-full text-center border border-white/5 rounded bg-white/5">
+                                                    <span className="text-white/30 text-lg italic">No badges equipped.</span>
+                                                </div>
+                                            )
+                                        })()}
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>

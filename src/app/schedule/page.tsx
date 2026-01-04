@@ -5,14 +5,12 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { CALENDAR_EVENTS } from '@/lib/data';
 import SneakerPoll from '@/components/SneakerPoll';
 
-import { Sneaker, Microphone, Basketball, Users, Gift } from '@phosphor-icons/react';
+import { Sneaker, Microphone, Basketball, Users, Barbell } from '@phosphor-icons/react';
 
 // Main calendar component
-const Calendar = ({ events, selectedDay, setSelectedDay }: { events: any[], selectedDay: number | null, setSelectedDay: (day: number) => void }) => {
-    const today = new Date();
-    // Default to January 2026
-    const currentMonth = 0; // January
-    const currentYear = 2026;
+const Calendar = ({ events, selectedDay, setSelectedDay, viewDate }: { events: any[], selectedDay: number | null, setSelectedDay: (day: number) => void, viewDate: Date }) => {
+    const currentMonth = viewDate.getMonth();
+    const currentYear = viewDate.getFullYear();
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
@@ -35,8 +33,8 @@ const Calendar = ({ events, selectedDay, setSelectedDay }: { events: any[], sele
         if (types.has('fashion')) icons.push(<Sneaker key="sneaker" size={16} color="var(--color-fashion)" weight="fill" />);
         if (types.has('media')) icons.push(<Microphone key="mic" size={16} color="var(--color-media)" weight="fill" />);
         if (types.has('game')) icons.push(<Basketball key="game" size={16} color="var(--color-game)" weight="fill" />);
-        if (types.has('community')) icons.push(<div key="philly" className="text-[10px] font-bold text-[#E60026]">P</div>); // Phillies P style representation
-        if (types.has('promo')) icons.push(<Gift key="gift" size={16} color="var(--color-promo)" weight="fill" />);
+        if (types.has('community')) icons.push(<div key="philly" className="w-4 h-4 flex items-center justify-center text-[10px] font-bold text-[#E60026]">P</div>); // Phillies P style representation
+        if (types.has('tryouts')) icons.push(<Barbell key="tryouts" size={16} color="var(--color-promo)" weight="fill" />);
         return icons;
     };
 
@@ -79,42 +77,98 @@ const Calendar = ({ events, selectedDay, setSelectedDay }: { events: any[], sele
 
 export default function SchedulePage() {
     const [selectedDay, setSelectedDay] = useState<number | null>(null);
+    const [filter, setFilter] = useState<string>('all'); // 'all', 'game', 'media', 'fashion', 'community', 'tryouts'
 
     useEffect(() => {
         // Set the initial date only on the client side to avoid hydration mismatch
         setSelectedDay(new Date().getDate());
     }, []);
 
+    const [viewDate, setViewDate] = useState(new Date(2026, 0, 1)); // Start at Jan 2026
+
+    const goToPrevMonth = () => {
+        setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1));
+    };
+
+    const goToNextMonth = () => {
+        setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1));
+    };
+
+    const formattedMonth = viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();
+
+    // Filter events
+    const filteredEvents = useMemo(() => {
+        if (filter === 'all') return CALENDAR_EVENTS;
+        return CALENDAR_EVENTS.filter(e => e.type === filter);
+    }, [filter]);
+
     const selectedDayEvents = useMemo(() => {
         if (!selectedDay) return [];
-        return CALENDAR_EVENTS.filter(e => e.day === selectedDay);
-    }, [selectedDay]);
+        return filteredEvents.filter(e => e.day === selectedDay);
+    }, [selectedDay, filteredEvents]);
+
+    const filters = [
+        { id: 'all', label: 'ALL EVENTS', icon: null },
+        { id: 'game', label: 'GAMES', icon: <Basketball size={16} weight="fill" /> },
+        { id: 'media', label: 'MEDIA', icon: <Microphone size={16} weight="fill" /> },
+        { id: 'fashion', label: 'DROPS', icon: <Sneaker size={16} weight="fill" /> },
+        { id: 'community', label: 'COMMUNITY', icon: <div className="text-[10px] font-bold">P</div> },
+        { id: 'tryouts', label: 'COMBINE', icon: <Barbell size={16} weight="fill" /> },
+    ];
 
     return (
-        <section id="schedule" className="content-section alt-bg">
-            <div className="calendar-header">
-                <h2 className="section-title">SCHEDULE & EVENTS</h2>
-                <div className="flex gap-2">
-                    <button className="btn btn-secondary">PREV</button>
-                    <div className="calendar-month-display">JANUARY 2026</div>
-                    <button className="btn btn-secondary">NEXT</button>
+        <section id="schedule" className="content-section alt-bg relative">
+            {/* HOVERING FILTER TAB */}
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-40 group">
+                <div className="bg-black/90 border border-primary/30 rounded-full px-6 py-2 shadow-2xl backdrop-blur-md cursor-pointer flex items-center gap-2 hover:border-primary transition-all duration-300">
+                    <span className="text-primary font-bold text-sm tracking-wider flex items-center gap-2">
+                        FILTER SCHEDULE <span className="text-xs text-white/50 group-hover:hidden">▼</span>
+                    </span>
+
+                    {/* DROPDOWN CONTENT (Visible on Hover) */}
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[220px] bg-black border border-primary/20 rounded shadow-xl overflow-hidden opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 flex flex-col">
+                        {filters.map(f => (
+                            <button
+                                key={f.id}
+                                onClick={() => setFilter(f.id)}
+                                className={`px-4 py-3 text-left text-xs font-bold uppercase tracking-wider hover:bg-white/10 flex items-center gap-3 transition-colors ${filter === f.id ? 'bg-primary text-black' : 'text-white'}`}
+                            >
+                                {f.icon && <span className={filter === f.id ? 'text-black' : 'text-primary'}>{f.icon}</span>}
+                                {f.label}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
 
-            <div className="calendar-legend">
+            <div className="calendar-header pt-12"> {/* Added PT for filter space */}
+                <h2 className="section-title">SCHEDULE & EVENTS</h2>
+                <div className="flex gap-2">
+                    <button onClick={goToPrevMonth} className="btn btn-secondary">PREV</button>
+                    <div className="calendar-month-display">{formattedMonth}</div>
+                    <button onClick={goToNextMonth} className="btn btn-secondary">NEXT</button>
+                </div>
+            </div>
+
+            <div className="calendar-legend opacity-50 hover:opacity-100 transition-opacity">
                 <div className="legend-item"><Basketball size={16} color="var(--color-game)" weight="fill" /> GAMES</div>
                 <div className="legend-item"><Microphone size={16} color="var(--color-media)" weight="fill" /> MEDIA/PODCAST</div>
                 <div className="legend-item"><Sneaker size={16} color="var(--color-fashion)" weight="fill" /> SNEAKER DROP</div>
-                <div className="legend-item"><div className="text-xs font-bold text-[#E60026]">P</div> COMMUNITY</div>
-                <div className="legend-item"><Gift size={16} color="var(--color-promo)" weight="fill" /> FAN GIVEAWAYS</div>
+                <div className="legend-item"><div className="w-4 h-4 flex items-center justify-center text-xs font-bold text-[#E60026]">P</div> COMMUNITY</div>
+                <div className="legend-item"><Barbell size={16} color="var(--color-promo)" weight="fill" /> COMBINE / TRYOUTS</div>
             </div>
 
             {selectedDay !== null && (
-                <Calendar events={CALENDAR_EVENTS} selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
+                <Calendar
+                    events={filteredEvents}
+                    selectedDay={selectedDay}
+                    setSelectedDay={setSelectedDay}
+                    viewDate={viewDate}
+                />
             )}
 
             <div className="event-list-container">
-                <h3 className="event-list-title">UPCOMING EVENTS for January {selectedDay}</h3>
+                <h3 className="event-list-title">UPCOMING EVENTS for {viewDate.toLocaleString('default', { month: 'long' })} {selectedDay}</h3>
                 <div>
                     {selectedDayEvents.length === 0 ? (
                         <div className="text-muted-foreground p-5">No events scheduled.</div>

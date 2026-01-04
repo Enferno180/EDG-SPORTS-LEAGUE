@@ -26,6 +26,15 @@ export interface Player {
     tov: number;        // Turnovers Per Game
     overall: number;
 
+    // New Fields
+    gamesPlayed?: number;
+    drillScoreSpeed?: number;
+    drillScoreVertical?: number;
+    drillScoreAgility?: number;
+    drillScoreStrength?: number;
+    drillScoreShooting?: number;
+    progression?: any; // JSON object
+
     nbaTranslate: string;
     attributes: {
         insideScoring: number;
@@ -413,7 +422,7 @@ export const CALENDAR_EVENTS = [
     { day: 22, type: 'tryouts', time: '9:00 AM', title: '2026 Combine Day 1', desc: 'Registration opens for all aspiring players.' },
     { day: 26, type: 'media', time: '8:00 PM', title: 'The Real EDG Podcast Ep. 2', desc: 'Meet the new commentator team.' },
 
-    { day: 15, type: 'promo', time: 'All Day', title: 'Host/Hostess Auditions', desc: 'Apply online to be the face of the new podcast.' },
+    { day: 15, type: 'media', time: 'All Day', title: 'Host/Hostess Auditions', desc: 'Apply online to be the face of the new podcast.' },
 
     // New Sneaker Drops
     { day: 1, type: 'fashion', time: '9:00 AM', title: "Nike A'One Drop (Men's Sizes)", desc: 'MENS • STONE MAUVE/METALLIC RED/BRONZE • $115.00', image: '/images/sneakers/nike_a_one.png' },

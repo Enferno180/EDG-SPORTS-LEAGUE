@@ -22,16 +22,19 @@ export default async function AdminLayout({
 
                 <nav className="flex-1 space-y-2">
                     <Link href="/admin" className="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded font-bold uppercase tracking-wider text-sm hover:bg-primary hover:text-black transition-colors">
-                        <i className="ph-fill ph-gauge"></i> Dashboard
+                        <i className="ph-fill ph-gauge"></i> Ops Center
                     </Link>
-                    <Link href="/admin/teams" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
-                        <i className="ph-fill ph-users-three"></i> Teams
+                    <Link href="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
+                        <i className="ph-fill ph-chart-line-up"></i> Financials
                     </Link>
-                    <Link href="/admin/players" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
-                        <i className="ph-fill ph-user"></i> Players
+                    <Link href="/admin/roster" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
+                        <i className="ph-fill ph-users-three"></i> Roster & Teams
                     </Link>
-                    <Link href="/admin/schedule" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
-                        <i className="ph-fill ph-calendar"></i> Schedule
+                    <Link href="/admin/games" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
+                        <i className="ph-fill ph-calendar-plus"></i> Game Uploads
+                    </Link>
+                    <Link href="/admin/live-score" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
+                        <i className="ph-fill ph-game-controller"></i> Live Scorekeeper
                     </Link>
                 </nav>
 
@@ -50,5 +53,6 @@ export default async function AdminLayout({
             <main className="flex-1 p-8 overflow-y-auto">
                 {children}
             </main>
-            );
+        </div>
+    );
 }

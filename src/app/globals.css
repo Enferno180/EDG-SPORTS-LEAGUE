@@ -49,6 +49,8 @@
     --color-media: hsl(280 60% 60%);
     --color-fashion: #E0115F;
     /* Ruby Red */
+    --color-promo: #38bdf8;
+    /* Sky Blue for Combine/Promo */
 
     /* Status Colors */
     --status-active: #10b981;
@@ -100,6 +102,20 @@
 
     .animate-gradient-xy {
         animation: gradient-xy 3s ease infinite;
+    }
+
+    .animate-glow {
+        animation: text-glow 2s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes text-glow {
+    from {
+        filter: drop-shadow(0 0 2px hsla(28, 95%, 52%, 0.4));
+    }
+
+    to {
+        filter: drop-shadow(0 0 15px hsla(28, 95%, 52%, 0.9));
     }
 }
 
@@ -335,4 +351,83 @@
     .event-tag {
         @apply text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded mb-2 inline-block;
     }
+
+    /* EKG Animation for Power Rankings */
+    .animate-ekg {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: dash 2.5s ease-in-out infinite;
+    }
+
+    /* Row EKG Animation (Simpler/Faster loop) */
+    .animate-ekg-row {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation-name: dash-row;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 1000;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    80% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes dash-row {
+    0% {
+        stroke-dashoffset: 200;
+        /* Start offset */
+    }
+
+    100% {
+        stroke-dashoffset: -200;
+        /* End offset continuous flow */
+    }
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.15);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.15);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
 }

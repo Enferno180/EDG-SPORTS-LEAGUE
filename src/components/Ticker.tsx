@@ -5,7 +5,7 @@ export function Ticker() {
     return (
         <div className="ticker-wrap">
             <div className="ticker">
-                {Array(10).fill(null).map((_, i) => (
+                {Array(4).fill(null).map((_, i) => (
                     <React.Fragment key={i}>
                         <div className="ticker-item font-bold text-primary">THE REAL EDG SPORTS PODCAST: EPISODE 1 OUT NOW</div>
                         <div className="ticker-item text-white/50">•</div>

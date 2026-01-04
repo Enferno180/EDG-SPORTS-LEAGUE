@@ -36,12 +36,12 @@ const TIERS = [
 
 export default function MembershipsPage() {
     return (
-        <main className="min-h-screen pt-32 pb-12 px-6 bg-gradient-to-b from-black via-zinc-950 to-black text-white">
+        <main className="min-h-screen pt-12 pb-12 px-6 bg-gradient-to-b from-black via-zinc-950 to-black text-white">
             <div className="max-w-7xl mx-auto space-y-16">
 
                 {/* Hero / Header */}
                 <div className="text-center space-y-6">
-                    <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-r from-edg-red to-white">
+                    <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-200 animate-glow">
                         FAN ZONE
                     </h1>
                     <p className="text-2xl text-gray-400 font-light max-w-2xl mx-auto">

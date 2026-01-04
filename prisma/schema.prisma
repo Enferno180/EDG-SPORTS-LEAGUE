@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING") // Optional but recommended for Vercel/Neon
 }
 
 model Account {
@@ -44,12 +45,20 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?   // For Credentials provider (optional)
-  role          String    @default("FAN") // ADMIN, COACH, PLAYER, FAN
-  subscriptionTier String @default("FREE") // FREE, TIER_1, TIER_2, TIER_3
+  role          String    @default("FAN") // ADMIN, COACH, PLAYER, FAN, SCOUT
+  
+  subscriptionPlanId String?
+  subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
+  playerId      String?   @unique // Link to a Player profile if they are a player
+  player        Player?   @relation(fields: [playerId], references: [id])
   accounts      Account[]
   sessions      Session[]
   scoutingNotes ScoutingNote[]
+  orders        Order[]
 }
+
+// Old models removed for Commerce Upgrade
+
 
 model VerificationToken {
   identifier String
@@ -92,7 +101,34 @@ model Player {
   ovr       Int     @default(60)
   archetype String? // e.g. "Playmaking Shot Creator"
   avatar    String?
+  // Stats (Averages & Totals)
   mpg       Float?  @default(0.0) // Minutes Per Game
+  ppg       Float   @default(0.0)
+  rpg       Float   @default(0.0)
+  apg       Float   @default(0.0)
+  spg       Float   @default(0.0)
+  bpg       Float   @default(0.0)
+  tov       Float   @default(0.0)
+  
+  // Shooting Splits (Calculated from totals)
+  fgPct     Float   @default(0.0)
+  threePtPct Float  @default(0.0)
+  ftPct     Float   @default(0.0)
+
+  // Raw Stat Totals (For calculation)
+  totalPoints  Int  @default(0)
+  totalRebounds Int @default(0)
+  totalAssists Int  @default(0)
+  totalSteals  Int  @default(0)
+  totalBlocks  Int  @default(0)
+  totalTurnovers Int @default(0)
+  
+  fgm         Int   @default(0)
+  fga         Int   @default(0)
+  threePtm    Int   @default(0)
+  threePta    Int   @default(0)
+  ftm         Int   @default(0)
+  fta         Int   @default(0)
   
   // Registration / Prospect Fields
   isProspect Boolean @default(false)
@@ -101,9 +137,41 @@ model Player {
   school     String?
   hometown   String?
   dob        String?
+
+  // Combine Drill Results (Raw Metrics)
+  drillScoreSpeed    Float? // Seconds
+  drillScoreVertical Float? // Inches
+  drillScoreAgility  Float? // Seconds
+  drillScoreStrength Int?   // Reps
+  drillScoreShooting Int?   // Make count / Score
   
+  // Physical Attributes (Derived from Drills - Static 0-99)
+  speed       Int @default(60)
+  vertical    Int @default(60)
+  strength    Int @default(60)
+  agility     Int @default(60) // Adding Agility based on benchmarks
+  athleticism Int @default(60) // Composite of above
+
+  // Skill Attributes (Progression Based 0-99)
+  insideScoring    Int @default(60)
+  midRangeScoring  Int @default(60)
+  threePointScoring Int @default(60)
+  passing          Int @default(60)
+  ballHandling     Int @default(60)
+  perimeterDefense Int @default(60)
+  postDefense      Int @default(60)
+  steals           Int @default(60)
+  blocks           Int @default(60)
+  rebounding       Int @default(60)
+  dunking          Int @default(60)
+  
+  gamesPlayed Int    @default(0)
+  progression String? // JSON string storing mini-target progress
+   
+  waiverSignedAt DateTime?
   attendance Attendance[]
   notes      ScoutingNote[]
+  user       User?
 }
 
 model Attendance {
@@ -127,4 +195,76 @@ model ScoutingNote {
 
   @@index([playerId])
   @@index([authorId])
+}
+
+
+
+// --- COMMERCE & FINANCIAL MODELS ---
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Int      // In cents (e.g. 2999 = $29.99)
+  image       String   // URL
+  category    String   // MERCH, EQUIPMENT, ACCESSORY
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  
+  orderItems  OrderItem[]
+}
+
+// For specific Ticket configurations per game (e.g. VIP vs GA)
+model TicketType {
+  id          String   @id @default(cuid())
+  gameId      String
+  name        String   // "General Admission", "Courtside", "VIP"
+  price       Int      // Cents
+  capacity    Int      // Max tickets available
+  sold        Int      @default(0)
+  
+  orderItems  OrderItem[]
+}
+
+model SubscriptionPlan {
+  id          String   @id @default(cuid())
+  name        String   // "Rookie", "Pro", "All-Star"
+  price       Int      // Cents per month
+  stripePriceId String // Stripe API ID
+  features    String   // JSON array of features
+  
+  users       User[]
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id])
+  guestEmail      String?
+  total           Int         // Cents
+  status          String      @default("PENDING") // PENDING, PAID, FAILED, REFUNDED
+  stripeSessionId String?     @unique
+  createdAt       DateTime    @default(now())
+  
+  items           OrderItem[]
+  
+  @@index([userId])
+}
+
+model OrderItem {
+  id            String   @id @default(cuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  // Dynamic Polymorphism (one of these should be set)
+  productId     String?
+  product       Product? @relation(fields: [productId], references: [id])
+  
+  ticketTypeId  String?
+  ticketType    TicketType? @relation(fields: [ticketTypeId], references: [id])
+  
+  quantity      Int      @default(1)
+  priceAtTime   Int      // Capture price at purchase to avoid data drift
+  
+  @@index([orderId])
 }

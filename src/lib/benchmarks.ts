@@ -1,5 +1,5 @@
 
-const BENCHMARKS = {
+export const BENCHMARKS = {
     // Scoring
     fieldGoalPercentage: 50.0,  // Shaq, Kareem (Elite efficiency)
     threePointPercentage: 45.0, // Steve Kerr, Curry

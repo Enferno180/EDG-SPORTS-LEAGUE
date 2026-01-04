@@ -39,7 +39,7 @@ const config: Config = {
                     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
             },
             animation: {
-                ticker: 'ticker 60s linear infinite',
+                ticker: 'ticker 4000s linear infinite',
             },
             keyframes: {
                 ticker: {

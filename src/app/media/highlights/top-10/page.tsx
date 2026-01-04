@@ -1,11 +1,11 @@
 
 import React from 'react';
-import { Header } from '@/components/Header';
+
 
 export default function PlaceholderPage() {
     return (
         <div className="min-h-screen bg-neutral-950 text-white font-sans">
-            <Header />
+
             <div className="flex flex-col items-center justify-center h-[80vh] px-4 text-center">
                 <h1 className="text-4xl md:text-6xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-500 mb-6 border-b-4 border-cyan-500 pb-2">
                     COMING SOON

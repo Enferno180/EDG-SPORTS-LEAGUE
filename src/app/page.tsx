@@ -7,8 +7,8 @@ export default function Home() {
         <div className="bg-background min-h-screen text-foreground font-body">
 
             {/* HERO SECTION - NBA Style: Main Story Left, Top Headlines Right */}
-            <section className="container mx-auto px-0 md:px-5 py-6">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <section className="container mx-auto px-0 md:px-5 py-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
                     {/* Main Hero Article (8 cols) - REPLACED WITH VIDEO PLAYER */}
                     <div className="lg:col-span-8 group relative bg-black rounded-sm border border-white/10 shadow-sm overflow-hidden">
@@ -42,13 +42,12 @@ export default function Home() {
                         {/* News List Items */}
                         <div className="divide-y divide-border/50">
                             {[
-                                { title: "THE REAL EDG PODCAST: EP 1", time: "OUT NOW", cat: "MEDIA" },
-                                { title: "JOB ALERT: HOSTS & COMMENTATORS", time: "APPLY NOW", cat: "CAREERS" },
-                                { title: "SNEAKER WATCH: RELEASE RADAR", time: "UPDATED", cat: "FASHION" },
-                                { title: "COMMUNITY: GIVING BACK", time: "WEEKEND", cat: "OUTREACH" },
-                                { title: "2026 COMBINE REGISTRATION", time: "OPEN", cat: "TRYOUTS" },
+                                { title: "THE REAL EDG PODCAST: EP 1", time: "OUT NOW", cat: "MEDIA", href: "#", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=200&auto=format&fit=crop" },
+                                { title: "JOB ALERT: HOSTS & COMMENTATORS", time: "APPLY NOW", cat: "CAREERS", href: "#", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=200&auto=format&fit=crop" },
+                                { title: "COMMUNITY: GIVING BACK", time: "WEEKEND", cat: "OUTREACH", href: "#", img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=200&auto=format&fit=crop" },
+                                { title: "2026 COMBINE REGISTRATION", time: "open", cat: "TRYOUTS", href: "/tryouts", img: "/images/combine_workbench.png" },
                             ].map((item, i) => (
-                                <Link key={i} href="#" className="flex gap-4 p-4 hover:bg-white/5 transition-colors group">
+                                <Link key={i} href={item.href} className="flex gap-4 p-4 hover:bg-white/5 transition-colors group">
                                     <div className="flex-1">
                                         <div className="flex items-center gap-2 mb-1">
                                             <span className="text-[10px] font-bold text-primary uppercase">{item.cat}</span>
@@ -60,7 +59,7 @@ export default function Home() {
                                     </div>
                                     <div className="w-20 h-14 bg-secondary rounded-sm overflow-hidden flex-shrink-0 relative">
                                         <img
-                                            src={`https://images.unsplash.com/photo-${['1579952363873-27f3bde9c2d3', '1533923307519-c6e3d2315b80', '1519861531473-920026393112', '1504450284411-e1cb538ea5f3', '1518063319789-7217e6706b04'][i % 5]}?q=80&w=200&auto=format&fit=crop`}
+                                            src={item.img}
                                             alt={item.title}
                                             className="w-full h-full object-cover"
                                         />
@@ -73,13 +72,13 @@ export default function Home() {
             </section>
 
             {/* QUICK LINKS / STATS STRIP */}
-            <section className="bg-card border-y border-border/50 py-4 mb-8 overflow-x-auto">
-                <div className="container mx-auto px-5 flex items-center justify-between gap-8 min-w-[800px]">
+            <section className="bg-card border-y border-border/50 py-6 mb-12 overflow-x-auto">
+                <div className="container mx-auto px-5 flex items-center justify-between gap-12 min-w-[900px]">
                     <Link href="/stats/standings" className="flex items-center gap-3 group">
                         <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold">1</div>
                         <div>
                             <div className="text-xs font-bold text-muted-foreground uppercase">EAST LEADER</div>
-                            <div className="font-head font-bold text-lg text-foreground leading-none group-hover:text-primary transition-colors">PHILLY KINGS</div>
+                            <div className="font-head font-bold text-lg text-foreground leading-none group-hover:text-primary transition-colors">POINT BREEZE PANTHERS</div>
                         </div>
                     </Link>
                     <div className="h-8 w-px bg-border/50"></div>
@@ -106,32 +105,33 @@ export default function Home() {
             </section>
 
             {/* LATEST NEWS GRID */}
-            <section className="container mx-auto px-5 mb-12">
-                <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-2">
+            <section className="container mx-auto px-5 mb-20">
+                <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
                     <h2 className="text-2xl font-head font-black uppercase italic tracking-tighter text-foreground">LATEST NEWS</h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {[
                         { id: 1, title: "The Real EDG Sports Podcast: Episode 1 is Live", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=600&auto=format&fit=crop" },
                         { id: 2, title: "Now Hiring: Podcast Hosts & Game Commentators", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" },
-                        { id: 4, title: "Community Outreach: Events in the City", img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=600&auto=format&fit=crop" }
+                        { id: 4, title: "Community Outreach: Events in the City", img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=600&auto=format&fit=crop" },
+                        { id: 5, title: "2026 Open Tryouts: Your Shot at the League", img: "/images/combine_workbench.png" }
                     ].map((item) => (
-                        <Link href="/sneakers" className="group cursor-pointer block">
+                        <Link key={item.id} href={`/news/${item.id}`} className="group cursor-pointer block">
                             <div className="aspect-video bg-secondary mb-3 overflow-hidden rounded-sm relative">
                                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors z-10"></div>
                                 <img
-                                    src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=600&auto=format&fit=crop"
-                                    alt="Fashion Alert: Upcoming Sneaker Releases"
+                                    src={item.img}
+                                    alt={item.title}
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
                             </div>
-                            <div className="text-xs font-bold text-primary mb-1 uppercase">Fashion</div>
-                            <h3 className="font-head font-bold text-lg text-foreground leading-tight mb-2 group-hover:underline decoration-2 underline-offset-2 decoration-primary">
-                                Sneaker Watch: This Week's Top Releases
+                            <div className="text-xs font-bold text-primary mb-2 uppercase tracking-wide">News</div>
+                            <h3 className="font-head font-bold text-xl text-foreground leading-tight mb-3 group-hover:underline decoration-2 underline-offset-2 decoration-primary">
+                                {item.title}
                             </h3>
-                            <p className="text-sm text-muted-foreground line-clamp-2">
-                                We stay fresh on and off the court. Check out our curated list of the hottest upcoming drops.
+                            <p className="text-base text-muted-foreground line-clamp-2 leading-relaxed">
+                                Read more about this story...
                             </p>
                         </Link>
                     ))}

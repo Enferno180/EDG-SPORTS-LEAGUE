@@ -11,10 +11,10 @@ import CheckoutForm from "@/components/CheckoutForm";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export default function RegisterPage() {
-    const [step, setStep] = useState<'info' | 'payment'>('info');
+    const [step, setStep] = useState<'info' | 'waiver' | 'payment'>('info');
     const [clientSecret, setClientSecret] = useState("");
     const [formData, setFormData] = useState({
-        firstName: '', lastName: '', email: '', phone: '',
+        firstName: '', lastName: '', email: '', password: '', phone: '',
         height: '', weight: '', position: '', school: '', hometown: '', dob: '',
         session: 'Session 1: July 10'
     });
@@ -58,7 +58,7 @@ export default function RegisterPage() {
             <div className="w-full max-w-2xl">
                 <h1 className="section-title mb-2 text-center">SEASON REGISTRATION</h1>
                 <p className="text-muted-foreground text-center mb-8">
-                    {step === 'info' ? 'Step 1: Player Bio' : 'Step 2: Secure Payment'}
+                    {step === 'info' ? 'Step 1: Player Bio' : step === 'waiver' ? 'Step 2: Drills & Waiver' : 'Step 3: Secure Payment'}
                 </p>
 
                 <div className="bg-card border border-white/10 p-8 rounded-lg shadow-2xl">
@@ -82,6 +82,13 @@ export default function RegisterPage() {
                                     <label className="text-xs font-bold uppercase text-gray-400">Email Address</label>
                                     <input required type="email" name="email" value={formData.email} onChange={handleInput} className="w-full bg-black/50 border border-white/20 rounded p-3 text-white focus:border-edg-red outline-none" placeholder="jane@example.com" />
                                 </div>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold uppercase text-gray-400">Create Password</label>
+                                    <input required type="password" name="password" value={formData.password} onChange={handleInput} className="w-full bg-black/50 border border-white/20 rounded p-3 text-white focus:border-edg-red outline-none" placeholder="••••••••" minLength={6} />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-xs font-bold uppercase text-gray-400">Active Phone #</label>
                                     <input required type="tel" name="phone" value={formData.phone} onChange={handleInput} className="w-full bg-black/50 border border-white/20 rounded p-3 text-white focus:border-edg-red outline-none" placeholder="(555) 123-4567" />
@@ -131,13 +138,75 @@ export default function RegisterPage() {
                                 <p className="text-xs text-edg-red mt-1">Limited to 40 players per session.</p>
                             </div>
 
-                            <button type="submit" className="w-full bg-edg-red hover:bg-red-700 text-white font-bold py-4 rounded uppercase tracking-widest mt-6 transition-transform hover:scale-[1.01]">
-                                Continue to Payment
+                            <button type="submit" onClick={(e) => { e.preventDefault(); setStep('waiver'); }} className="w-full bg-edg-red hover:bg-red-700 text-white font-bold py-4 rounded uppercase tracking-widest mt-6 transition-transform hover:scale-[1.01]">
+                                Continue to Drills & Waiver
                             </button>
                         </form>
                     )}
 
-                    {/* STEP 2: PAYMENT */}
+                    {/* STEP 2: WAIVER & DRILLS */}
+                    {step === 'waiver' && (
+                        <div className="space-y-6 fade-in-up">
+                            <h2 className="text-xl font-bold uppercase text-edg-red mb-4">Combine Drills & Waiver</h2>
+                            <p className="text-sm text-gray-400 mb-4">
+                                By participating in the Combine, you will be tested on the following drills to determine your initial Physical Attributes.
+                                These results are static and set your athletic baseline for the season.
+                            </p>
+
+                            <div className="grid grid-cols-2 gap-4 mb-6">
+                                <div className="bg-white/5 p-3 rounded border border-white/10">
+                                    <h4 className="font-bold text-white text-sm">Sprint</h4>
+                                    <p className="text-xs text-gray-500">Measures Speed</p>
+                                </div>
+                                <div className="bg-white/5 p-3 rounded border border-white/10">
+                                    <h4 className="font-bold text-white text-sm">Max Vertical</h4>
+                                    <p className="text-xs text-gray-500">Measures Vertical</p>
+                                </div>
+                                <div className="bg-white/5 p-3 rounded border border-white/10">
+                                    <h4 className="font-bold text-white text-sm">Agility Lane</h4>
+                                    <p className="text-xs text-gray-500">Measures Agility</p>
+                                </div>
+                                <div className="bg-white/5 p-3 rounded border border-white/10">
+                                    <h4 className="font-bold text-white text-sm">Bench Press</h4>
+                                    <p className="text-xs text-gray-500">Measures Strength</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-red-900/20 border border-edg-red/50 p-4 rounded mb-6">
+                                <h4 className="font-bold text-edg-red text-sm mb-2">Participation Waiver</h4>
+                                <p className="text-xs text-gray-400 leading-relaxed h-24 overflow-y-auto">
+                                    I hereby explicitly agree to participate in the athletic activities at the Combine.
+                                    I acknowledge the risks involved in physical testing and basketball activities.
+                                    I declare that I am physically fit to participate.
+                                    I grant the league permission to use my likeness and combine results for public display on the website.
+                                </p>
+                            </div>
+
+                            <div className="flex items-center space-x-3 mb-6">
+                                <input type="checkbox" id="waiver" className="w-5 h-5 accent-edg-red cursor-pointer"
+                                    onChange={(e) => {
+                                        if (e.target.checked) {
+                                            // Enable button logic could go here, for now just allow click
+                                        }
+                                    }}
+                                />
+                                <label htmlFor="waiver" className="text-sm text-gray-300 cursor-pointer select-none">
+                                    I read and agree to the Terms & Waiver.
+                                </label>
+                            </div>
+
+                            <div className="flex space-x-4">
+                                <button onClick={() => setStep('info')} className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded uppercase text-sm">
+                                    Back
+                                </button>
+                                <button onClick={() => setStep('payment')} className="flex-1 bg-edg-red hover:bg-red-700 text-white font-bold py-3 rounded uppercase text-sm">
+                                    Accept & Continue
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* STEP 3: PAYMENT */}
                     {step === 'payment' && (
                         <div className="space-y-6 fade-in-up">
 
@@ -145,7 +214,7 @@ export default function RegisterPage() {
                             <div className="bg-white/5 p-4 rounded border border-white/10 text-sm space-y-2">
                                 <div className="flex justify-between border-b border-white/10 pb-2 mb-2">
                                     <span className="font-bold text-white uppercase tracking-wider">Player Profile</span>
-                                    <button onClick={() => setStep('info')} className="text-edg-red hover:underline text-xs uppercase font-bold">Edit</button>
+                                    <button onClick={() => setStep('waiver')} className="text-edg-red hover:underline text-xs uppercase font-bold">Edit</button>
                                 </div>
                                 <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-gray-300">
                                     <div><span className="text-gray-500 text-xs block">Name</span>{formData.firstName} {formData.lastName}</div>
@@ -184,7 +253,20 @@ export default function RegisterPage() {
                                             <form action={async () => {
                                                 const data = new FormData();
                                                 Object.keys(formData).forEach(key => data.append(key, formData[key as keyof typeof formData]));
-                                                await registerProspect(data);
+
+                                                try {
+                                                    const result = await registerProspect(data);
+                                                    if (result?.success) {
+                                                        // Success! Redirect or show success
+                                                        // For now, let's redirect manually
+                                                        window.location.href = '/scouting-report';
+                                                    } else {
+                                                        // Show error
+                                                        alert(result?.message || 'Registration failed. Please try again.');
+                                                    }
+                                                } catch (err) {
+                                                    alert('An unexpected error occurred.');
+                                                }
                                             }}>
                                                 <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 text-xl shadow-xl uppercase tracking-widest scale-110">
                                                     Confirm Registration (Demo)

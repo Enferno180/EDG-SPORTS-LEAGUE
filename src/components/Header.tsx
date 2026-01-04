@@ -9,7 +9,7 @@ export async function Header() {
     const session = await auth();
 
     return (
-        <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10 py-3">
+        <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10 py-5">
             <div className="container mx-auto px-5 flex items-center justify-between">
                 {/* Logo & Brand */}
                 <div className="flex items-center gap-4">
@@ -30,7 +30,7 @@ export async function Header() {
 
                     {/* STATS Dropdown */}
                     <NavDropdown
-                        title="STATS"
+                        title="PLAYER STATS"
                         items={[
                             { label: 'Player Stats', href: '/stats/players' },
                             { label: 'League Leaders', href: '/stats/leaders' },
@@ -49,10 +49,29 @@ export async function Header() {
                         ]}
                     />
 
+                    {/* SCHEDULE Link */}
                     <Link href="/schedule" className="text-1xl font-bold italic tracking-tighter text-muted-foreground hover:text-primary transition-colors">SCHEDULE</Link>
+
 
                     {/* TICKETS Link */}
                     <Link href="/tickets" className="text-1xl font-bold italic tracking-tighter text-muted-foreground hover:text-primary transition-colors">TICKETS</Link>
+
+                    {/* TV Link */}
+                    <Link href="/tv" className="text-1xl font-bold italic tracking-tighter text-red-500 hover:text-red-400 transition-colors flex items-center gap-1">
+                        <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                        TV
+                    </Link>
+
+                    {/* THE DROP Dropdown */}
+                    <NavDropdown
+                        title="THE DROP"
+                        items={[
+                            { label: 'EDG Life (Apparel)', href: '/drop-zone#life' },
+                            { label: 'EDG Game Time (Gear)', href: '/drop-zone#gametime' },
+                            { label: 'Accessories', href: '/drop-zone#accessories' },
+                            { label: 'Shop All', href: '/drop-zone' },
+                        ]}
+                    />
 
                     {/* TEAMS Dropdown (Updated) */}
                     <NavDropdown
@@ -72,6 +91,7 @@ export async function Header() {
                         items={[
                             { label: 'Top 10 Highlights', href: '/media/highlights/top-10' },
                             { label: 'Player of the Game', href: '/media/highlights/potg' },
+                            { label: 'Combine All-Access', href: '/media/combine' },
                             { label: 'THE REAL EDG SPORTS PODCAST', href: '/media/podcast' }
                         ]}
                     />

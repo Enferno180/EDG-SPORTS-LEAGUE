@@ -83,7 +83,7 @@ export default function RootLayout({
                                 <h4 className="font-head font-bold text-white mb-4 tracking-wider">EDG NETWORK</h4>
                                 <ul className="space-y-2">
                                     <li><Link href="/media" className="text-muted-foreground hover:text-primary transition-colors">Media & News</Link></li>
-                                    <li><Link href="/memberships" className="text-muted-foreground hover:text-primary transition-colors">Fan Zone (EDG Pass)</Link></li>
+                                    <li><Link href="/tickets" className="text-muted-foreground hover:text-primary transition-colors">Tickets (EDG Pass)</Link></li>
                                     <li><Link href="/tryouts" className="text-muted-foreground hover:text-primary transition-colors">Join the League</Link></li>
                                     <li><Link href="/careers" className="text-muted-foreground hover:text-primary transition-colors">Careers</Link></li>
                                     <li><Link href="/partners" className="text-muted-foreground hover:text-primary transition-colors">Partners</Link></li>

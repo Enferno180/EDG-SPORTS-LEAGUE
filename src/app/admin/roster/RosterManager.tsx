@@ -16,11 +16,11 @@ export default function RosterManager({ teams }: { teams: any[] }) {
     return (
         <div className="space-y-6">
             {/* Team Selector */}
-            <div className="flex justify-between items-center bg-gray-900 p-4 rounded-lg border border-white/10">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-gray-900 p-4 rounded-lg border border-white/10">
                 <select
                     value={selectedTeamId}
                     onChange={(e) => setSelectedTeamId(e.target.value)}
-                    className="bg-gray-800 text-white p-2 rounded border border-gray-700"
+                    className="w-full md:w-auto bg-gray-800 text-white p-2 rounded border border-gray-700"
                 >
                     {teams.map((team: any) => (
                         <option key={team.id} value={team.id}>{team.name}</option>
@@ -29,7 +29,7 @@ export default function RosterManager({ teams }: { teams: any[] }) {
 
                 <button
                     onClick={() => setIsAdding(!isAdding)}
-                    className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded font-bold"
+                    className="w-full md:w-auto bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded font-bold"
                 >
                     {isAdding ? 'Cancel' : '+ Sign Player'}
                 </button>
@@ -68,45 +68,53 @@ export default function RosterManager({ teams }: { teams: any[] }) {
                     </h2>
                 </div>
 
-                <table className="w-full text-left text-gray-300">
-                    <thead className="bg-gray-950 text-gray-400 uppercase text-xs">
-                        <tr>
-                            <th className="px-6 py-3">OVR</th>
-                            <th className="px-6 py-3">Name</th>
-                            <th className="px-6 py-3">Pos</th>
-                            <th className="px-6 py-3">Height</th>
-                            <th className="px-6 py-3 text-right">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-800">
-                        {players.length === 0 ? (
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left text-gray-300 min-w-[600px]">
+                        <thead className="bg-gray-950 text-gray-400 uppercase text-xs">
                             <tr>
-                                <td colSpan={5} className="px-6 py-8 text-center text-gray-500">No players on this roster.</td>
+                                <th className="px-6 py-3">OVR</th>
+                                <th className="px-6 py-3">Name</th>
+                                <th className="px-6 py-3">Pos</th>
+                                <th className="px-6 py-3">Height</th>
+                                <th className="px-6 py-3 text-right">Action</th>
                             </tr>
-                        ) : players.map((player: any) => (
-                            <tr key={player.id} className="hover:bg-white/5 transition-colors">
-                                <td className="px-6 py-4 font-bold text-lg" style={{ color: player.ovr >= 90 ? '#fbbf24' : player.ovr >= 80 ? '#22c55e' : '#94a3b8' }}>
-                                    {player.ovr}
-                                </td>
-                                <td className="px-6 py-4 font-medium text-white">{player.name}</td>
-                                <td className="px-6 py-4">{player.position}</td>
-                                <td className="px-6 py-4">{player.height}</td>
-                                <td className="px-6 py-4 text-right">
-                                    <button
-                                        onClick={() => {
-                                            if (confirm('Release ' + player.name + '?')) {
-                                                deletePlayer(player.id)
-                                            }
-                                        }}
-                                        className="text-red-500 hover:text-red-400 hover:bg-red-500/10 px-3 py-1 rounded text-sm font-medium transition-colors"
-                                    >
-                                        Release
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody className="divide-y divide-gray-800">
+                            {players.length === 0 ? (
+                                <tr>
+                                    <td colSpan={5} className="px-6 py-8 text-center text-gray-500">No players on this roster.</td>
+                                </tr>
+                            ) : players.map((player: any) => (
+                                <tr key={player.id} className="hover:bg-white/5 transition-colors">
+                                    <td className="px-6 py-4 font-bold text-lg" style={{ color: player.ovr >= 90 ? '#fbbf24' : player.ovr >= 80 ? '#22c55e' : '#94a3b8' }}>
+                                        {player.ovr}
+                                    </td>
+                                    <td className="px-6 py-4 font-medium text-white">{player.name}</td>
+                                    <td className="px-6 py-4">{player.position}</td>
+                                    <td className="px-6 py-4">{player.height}</td>
+                                    <td className="px-6 py-4 text-right flex justify-end gap-2">
+                                        <a
+                                            href={`/admin/players/${player.id}/edit-stats`}
+                                            className="text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 px-3 py-1 rounded text-sm font-medium transition-colors border border-blue-500/20"
+                                        >
+                                            STATS
+                                        </a>
+                                        <button
+                                            onClick={() => {
+                                                if (confirm('Release ' + player.name + '?')) {
+                                                    deletePlayer(player.id)
+                                                }
+                                            }}
+                                            className="text-red-500 hover:text-red-400 hover:bg-red-500/10 px-3 py-1 rounded text-sm font-medium transition-colors"
+                                        >
+                                            Release
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     )
