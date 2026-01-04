@@ -38,24 +38,7 @@ function MerchGrid({ items }: { items: any[] }) {
     const [loading, setLoading] = useState<string | null>(null);
 
     const handleCheckout = async (item: any) => {
-        setLoading(item.name);
-        try {
-            const res = await fetch('/api/checkout', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ item }),
-            });
-            const data = await res.json();
-            if (data.url) {
-                window.location.href = data.url;
-            } else {
-                alert('Checkout failed: ' + (data.error || 'Unknown error'));
-                setLoading(null);
-            }
-        } catch (error) {
-            console.error("Checkout Request Failed", error);
-            setLoading(null);
-        }
+        alert("Checkout is currently disabled.");
     };
 
     return (

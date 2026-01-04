@@ -46,15 +46,12 @@ export default async function TicketsPage() {
 
                                 <div className="flex items-center gap-6 mt-4 md:mt-0">
                                     <div className="text-right">
-                                        <div className="text-2xl font-bold">${(ticket.price / 100).toFixed(2)}</div>
+                                        <div className="text-2xl font-bold text-gray-500">${(ticket.price / 100).toFixed(2)}</div>
                                         <div className="text-xs text-gray-500">per seat</div>
                                     </div>
-                                    <form action="/api/checkout" method="POST">
-                                        <input type="hidden" name="ticketTypeId" value={ticket.id} />
-                                        <button className="px-6 py-3 bg-brand-primary text-black font-bold uppercase rounded hover:bg-brand-primary/90 transition">
-                                            Get Tickets
-                                        </button>
-                                    </form>
+                                    <button disabled className="px-6 py-3 bg-gray-800 text-gray-400 font-bold uppercase rounded cursor-not-allowed">
+                                        Sales Closed
+                                    </button>
                                 </div>
                             </div>
                         ))

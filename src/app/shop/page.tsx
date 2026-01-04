@@ -46,13 +46,14 @@ export default async function ShopPage() {
                                     <h3 className="text-xl font-bold mb-2">{product.name}</h3>
                                     <p className="text-gray-400 text-sm mb-4 line-clamp-2">{product.description}</p>
                                     <div className="flex items-center justify-between">
-                                        <span className="text-2xl font-bold">${(product.price / 100).toFixed(2)}</span>
-                                        <form action="/api/checkout" method="POST">
-                                            <input type="hidden" name="productId" value={product.id} />
-                                            <button type="submit" className="px-4 py-2 bg-white text-black font-bold uppercase text-sm rounded hover:bg-gray-200 transition">
-                                                Buy Now
-                                            </button>
-                                        </form>
+                                        <div>
+                                            {/* <span className="text-2xl font-bold">${(product.price / 100).toFixed(2)}</span> */}
+                                            <span className="text-2xl font-bold text-gray-500 line-through">${(product.price / 100).toFixed(2)}</span>
+                                            <span className="ml-2 text-brand-primary text-sm font-bold">SOLD OUT</span>
+                                        </div>
+                                        <button disabled className="px-4 py-2 bg-gray-800 text-gray-400 font-bold uppercase text-sm rounded cursor-not-allowed">
+                                            Coming Soon
+                                        </button>
                                     </div>
                                 </div>
                             </div>

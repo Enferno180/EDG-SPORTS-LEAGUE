@@ -63,12 +63,9 @@ function PlanCard({ plan }: { plan: { id: string, name: string, price: number, f
                 ))}
             </ul>
 
-            <form action="/api/checkout" method="POST">
-                <input type="hidden" name="planId" value={plan.id} />
-                <button className="w-full py-4 bg-white text-black font-bold uppercase rounded hover:bg-gray-200 transition">
-                    Choose {plan.name}
-                </button>
-            </form>
+            <button disabled className="w-full py-4 bg-gray-800 text-gray-400 font-bold uppercase rounded cursor-not-allowed">
+                Subscribing Disabled
+            </button>
         </div>
     );
 }
