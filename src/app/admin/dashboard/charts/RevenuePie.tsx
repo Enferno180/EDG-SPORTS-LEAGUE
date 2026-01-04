@@ -28,7 +28,7 @@ export default function RevenuePie({ data }: { data: { name: string, value: numb
                     <Tooltip
                         contentStyle={{ backgroundColor: '#111', border: '1px solid #333' }}
                         itemStyle={{ color: '#fff' }}
-                        formatter={(value: number) => [`$${value.toFixed(2)}`, 'Revenue']}
+                        formatter={(value: any) => [`$${Number(value).toFixed(2)}`, 'Revenue']}
                     />
                     <Legend />
                 </PieChart>
