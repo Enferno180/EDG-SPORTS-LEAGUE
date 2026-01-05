@@ -31,7 +31,7 @@ const NAV_ITEMS: NavItem[] = [
         ]
     },
     { label: 'SCHEDULE', href: '/schedule' },
-    { label: 'TICKETS', href: '/tickets' },
+    { label: 'TICKETS', href: '/memberships' },
     { label: 'TV', href: '/tv' },
     {
         label: 'THE DROP',
