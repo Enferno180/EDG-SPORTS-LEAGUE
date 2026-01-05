@@ -53,7 +53,7 @@ export default function InjuriesPage() {
                                 <td className="td-cell">
                                     <div className="player-cell">
                                         <img src={p.avatar} alt={p.name} className="player-avatar" />
-                                        <button onClick={() => setSelectedPlayer(p)} className="text-left hover:text-primary transition-colors">{p.name}</button>
+                                        <button onClick={() => setSelectedPlayer(p)} className="text-left text-white font-bold hover:text-primary transition-colors">{p.name}</button>
                                     </div>
                                 </td>
                                 <td className="td-cell text-muted-foreground">{p.team}</td>

@@ -49,7 +49,7 @@ export default function LeadersPage() {
                                             <div className="flex items-center gap-2">
                                                 <img src={p.avatar} className="w-8 h-8 rounded-full border border-border" alt={p.name} />
                                                 <div>
-                                                    <button onClick={() => setSelectedPlayer(p)} className={`text-left hover:text-primary transition-colors ${index === 0 ? 'text-accent text-base font-bold' : 'text-sm'}`}>{p.name}</button>
+                                                    <button onClick={() => setSelectedPlayer(p)} className={`text-left hover:text-primary transition-colors ${index === 0 ? 'text-accent text-base font-bold' : 'text-gray-200 text-sm font-medium'}`}>{p.name}</button>
                                                     <div className="text-xs text-muted-foreground">{p.team}</div>
                                                 </div>
                                             </div>
