@@ -37,21 +37,23 @@ export default function StandingsPage() {
                 {teamStandings.map(division => (
                     <div key={division.name} className="division-card">
                         <h3 className="division-title">{division.name}</h3>
-                        <table className="w-full">
-                            <thead><tr><th className="th-cell">TEAM</th><th className="th-cell">W</th><th className="th-cell">L</th></tr></thead>
-                            <tbody>
-                                {division.teams.map((team, index) => (
-                                    <tr key={team.name} className={`table-row ${index === 0 ? 'rank-1' : 'eliminated'}`}>
-                                        <td className="team-cell">
-                                            {getTeamLogo(team.name) && <img src={getTeamLogo(team.name) || ''} className="team-logo-small" alt={`${team.name} logo`} />}
-                                            {team.name}
-                                        </td>
-                                        <td className="td-cell">{team.wins}</td>
-                                        <td className="td-cell">{team.losses}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                        <div className="scrollable-table-container">
+                            <table className="w-full">
+                                <thead><tr><th className="th-cell">TEAM</th><th className="th-cell">W</th><th className="th-cell">L</th></tr></thead>
+                                <tbody>
+                                    {division.teams.map((team, index) => (
+                                        <tr key={team.name} className={`table-row ${index === 0 ? 'rank-1' : 'eliminated'}`}>
+                                            <td className="team-cell">
+                                                {getTeamLogo(team.name) && <img src={getTeamLogo(team.name) || ''} className="team-logo-small" alt={`${team.name} logo`} />}
+                                                {team.name}
+                                            </td>
+                                            <td className="td-cell">{team.wins}</td>
+                                            <td className="td-cell">{team.losses}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 ))}
             </div>

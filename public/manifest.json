@@ -1,0 +1,21 @@
+{
+    "name": "EDG Sports League",
+    "short_name": "EDG Sports",
+    "description": "The official app of the EDG Sports League. Elevating the Game. Empowering the Future.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#E65100",
+    "icons": [
+        {
+            "src": "/edg-logo.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "/edg-logo.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg"
+        }
+    ]
+}

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { auth, signOut } from '@/auth';
 import { NavDropdown } from '@/components/NavDropdown';
+import { MobileNav } from '@/components/MobileNav';
 
 export async function Header() {
     const session = await auth();
@@ -127,12 +128,8 @@ export async function Header() {
                     )}
                 </div>
 
-                {/* Mobile Menu Toggle (Placeholder) */}
-                <button
-                    className="lg:hidden text-2xl focus:outline-none text-foreground"
-                >
-                    ☰
-                </button>
+                {/* Mobile Menu Toggle */}
+                <MobileNav />
             </div>
         </header>
     );

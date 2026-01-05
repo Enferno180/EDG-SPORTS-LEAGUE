@@ -83,6 +83,10 @@
         text-wrap: balance;
     }
 
+    .scrollable-table-container {
+        @apply w-full overflow-x-auto;
+    }
+
     .animate-shimmer {
         background: linear-gradient(90deg,
                 rgba(255, 255, 255, 0) 0%,
@@ -268,11 +272,11 @@
     }
 
     .calendar-container {
-        @apply bg-card border border-border rounded-sm p-4 overflow-hidden shadow-lg;
+        @apply bg-card border border-border rounded-sm p-4 overflow-x-auto shadow-lg;
     }
 
     .calendar-grid {
-        @apply grid grid-cols-7 gap-px bg-border;
+        @apply grid grid-cols-7 gap-px bg-border min-w-[800px];
     }
 
     .calendar-day-header {

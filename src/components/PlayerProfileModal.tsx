@@ -111,7 +111,7 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
             >
 
                 {/* 1. Header Section - The "Player Card" look */}
-                <div className={`relative h-48 w-full overflow-hidden shrink-0 ${tierStyle.bg}`}>
+                <div className={`relative h-auto md:h-48 w-full overflow-hidden shrink-0 ${tierStyle.bg}`}>
                     {/* Overlay for shimmer effects */}
                     {playerOvr >= 80 && <div className="absolute inset-0 animate-shimmer"></div>}
 
@@ -123,30 +123,30 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                         ></div>
                     )}
 
-                    <div className="relative z-10 h-full flex items-center justify-between px-10">
+                    <div className="relative z-10 h-full flex flex-col md:flex-row items-center justify-between px-4 py-6 md:py-0 md:px-10 gap-4 md:gap-0">
                         {/* LEFT: Jersey Number (Big, Watermark style) */}
-                        <div className="flex items-center">
-                            <span className="text-8xl font-black text-white/10 select-none tracking-tighter" style={{ fontFamily: 'Impact, sans-serif' }}>
+                        <div className="flex items-center scale-75 md:scale-100 origin-left">
+                            <span className="text-6xl md:text-8xl font-black text-white/10 select-none tracking-tighter" style={{ fontFamily: 'Impact, sans-serif' }}>
                                 {player.jersey}
                             </span>
                             <img
                                 src={player.avatar}
                                 alt={player.name}
-                                className="w-32 h-32 rounded-full border-4 shadow-xl ml-[-20px] object-cover"
+                                className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 shadow-xl ml-[-10px] md:ml-[-20px] object-cover"
                                 style={{ borderColor: primaryColor }}
                             />
                         </div>
 
                         {/* CENTER: Name & Info */}
-                        <div className="flex-1 px-8">
-                            <div className="flex items-baseline gap-3 mb-1">
-                                <h1 className="text-5xl font-black text-white uppercase tracking-tight leading-none">
+                        <div className="flex-1 px-0 md:px-8 text-center md:text-left w-full">
+                            <div className="flex items-baseline justify-center md:justify-start gap-3 mb-1">
+                                <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight leading-none text-center md:text-left">
                                     {player.name.split(' ')[0]} <span style={{ color: primaryColor }}>{player.name.split(' ').slice(1).join(' ')}</span>
                                 </h1>
                             </div>
 
                             {/* Sub-Info Banner */}
-                            <div className="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-white/80 bg-white/5 p-2 rounded inline-block backdrop-blur-sm">
+                            <div className="flex flex-wrap justify-center md:justify-start items-center gap-2 md:gap-4 text-xs md:text-sm font-bold uppercase tracking-widest text-white/80 bg-white/5 p-2 rounded inline-block backdrop-blur-sm">
                                 <span className='text-white'>{player.pos}</span>
                                 <span className="w-px h-3 bg-white/30"></span>
                                 <span>{player.team}</span>

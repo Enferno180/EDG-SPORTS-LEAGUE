@@ -27,6 +27,8 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,400&family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+                <link rel="manifest" href="/manifest.json" />
+                <meta name="theme-color" content="#E65100" />
                 <script src="https://unpkg.com/@phosphor-icons/web" async></script>
             </head>
             <body className="bg-background text-foreground min-h-screen flex flex-col font-body">
