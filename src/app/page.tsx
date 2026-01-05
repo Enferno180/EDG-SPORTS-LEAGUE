@@ -42,9 +42,9 @@ export default function Home() {
                         {/* News List Items */}
                         <div className="divide-y divide-border/50">
                             {[
-                                { title: "THE REAL EDG PODCAST: EP 1", time: "OUT NOW", cat: "MEDIA", href: "#", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=200&auto=format&fit=crop" },
-                                { title: "JOB ALERT: HOSTS & COMMENTATORS", time: "APPLY NOW", cat: "CAREERS", href: "#", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=200&auto=format&fit=crop" },
-                                { title: "COMMUNITY: GIVING BACK", time: "WEEKEND", cat: "OUTREACH", href: "#", img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=200&auto=format&fit=crop" },
+                                { title: "THE REAL EDG PODCAST: EP 1", time: "OUT NOW", cat: "MEDIA", href: "/coming-soon", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=200&auto=format&fit=crop" },
+                                { title: "JOB ALERT: HOSTS & COMMENTATORS", time: "APPLY NOW", cat: "CAREERS", href: "/careers", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=200&auto=format&fit=crop" },
+                                { title: "COMMUNITY: GIVING BACK", time: "WEEKEND", cat: "OUTREACH", href: "/coming-soon", img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=200&auto=format&fit=crop" },
                                 { title: "2026 COMBINE REGISTRATION", time: "open", cat: "TRYOUTS", href: "/tryouts", img: "/images/combine_workbench.png" },
                             ].map((item, i) => (
                                 <Link key={i} href={item.href} className="flex gap-4 p-4 hover:bg-white/5 transition-colors group">
@@ -112,12 +112,12 @@ export default function Home() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {[
-                        { id: 1, title: "The Real EDG Sports Podcast: Episode 1 is Live", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=600&auto=format&fit=crop" },
-                        { id: 2, title: "Now Hiring: Podcast Hosts & Game Commentators", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" },
-                        { id: 4, title: "Community Outreach: Events in the City", img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=600&auto=format&fit=crop" },
-                        { id: 5, title: "2026 Open Tryouts: Your Shot at the League", img: "/images/combine_workbench.png" }
+                        { id: 1, title: "The Real EDG Sports Podcast: Episode 1 is Live", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=600&auto=format&fit=crop", href: "/coming-soon" },
+                        { id: 2, title: "Now Hiring: Podcast Hosts & Game Commentators", img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop", href: "/careers" },
+                        { id: 4, title: "Community Outreach: Events in the City", img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=600&auto=format&fit=crop", href: "/coming-soon" },
+                        { id: 5, title: "2026 Open Tryouts: Your Shot at the League", img: "/images/combine_workbench.png", href: "/tryouts" }
                     ].map((item) => (
-                        <Link key={item.id} href={`/news/${item.id}`} className="group cursor-pointer block">
+                        <Link key={item.id} href={item.href} className="group cursor-pointer block">
                             <div className="aspect-video bg-secondary mb-3 overflow-hidden rounded-sm relative">
                                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors z-10"></div>
                                 <img
