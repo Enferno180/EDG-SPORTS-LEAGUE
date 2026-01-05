@@ -55,7 +55,7 @@ export async function Header() {
 
 
                     {/* TICKETS Link */}
-                    <Link href="/tickets" className="text-1xl font-bold italic tracking-tighter text-muted-foreground hover:text-primary transition-colors">TICKETS</Link>
+                    <Link href="/memberships" className="text-1xl font-bold italic tracking-tighter text-muted-foreground hover:text-primary transition-colors">TICKETS</Link>
 
                     {/* TV Link */}
                     <Link href="/tv" className="text-1xl font-bold italic tracking-tighter text-red-500 hover:text-red-400 transition-colors flex items-center gap-1">

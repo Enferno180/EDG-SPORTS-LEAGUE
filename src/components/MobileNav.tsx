@@ -145,8 +145,8 @@ export function MobileNav() {
 
                                             <div
                                                 className={`grid transition-all duration-300 ease-in-out ${expandedItem === item.label
-                                                        ? 'grid-rows-[1fr] opacity-100 mb-4'
-                                                        : 'grid-rows-[0fr] opacity-0'
+                                                    ? 'grid-rows-[1fr] opacity-100 mb-4'
+                                                    : 'grid-rows-[0fr] opacity-0'
                                                     }`}
                                             >
                                                 <div className="overflow-hidden">

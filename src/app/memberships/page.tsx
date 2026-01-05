@@ -71,7 +71,11 @@ export default function MembershipsPage() {
                             </div>
 
                             {/* Action */}
-                            <Link href={tier.ticket ? `/tickets` : `/join?tier=${tier.id}`} className="block">
+                            <Link
+                                href={tier.ticket ? `/tickets` : "https://www.zeffy.com/en-US/ticketing/edg-sports-leagues-memberships"}
+                                className="block"
+                                target={tier.ticket ? undefined : "_blank"}
+                            >
                                 <Button className="w-full font-black italic uppercase tracking-widest text-lg py-8 rounded-full shadow-lg bg-white/10 hover:bg-edg-red text-white transition-colors border border-white/10 group-hover:border-white/30">
                                     {tier.ticket ? 'Buy Tickets' : 'Join Club'}
                                 </Button>
