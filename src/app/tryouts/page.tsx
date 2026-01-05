@@ -48,7 +48,7 @@ export default function TryoutsPage() {
                         <div className="text-4xl font-black text-white">$75.00</div>
                         <p className="text-gray-400 text-sm">One-time fee covers facility, gear, and media coverage.</p>
 
-                        <Link href="https://www.zeffy.com/en-US/ticketing/edg-sports-league-corporations-shop" target="_blank" className="block pt-4">
+                        <Link href="https://www.zeffy.com/en-US/ticketing/edg-sports-league-basketball-combine-tryout" target="_blank" className="block pt-4">
                             <Button className="w-full bg-edg-red hover:bg-red-700 text-white font-bold py-6 text-xl italic uppercase tracking-widest transition-transform hover:scale-105 shadow-xl">
                                 Secure Your Spot
                             </Button>
