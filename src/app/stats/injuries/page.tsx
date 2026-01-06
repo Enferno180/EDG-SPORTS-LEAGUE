@@ -58,7 +58,7 @@ export default function InjuriesPage() {
                                 </td>
                                 <td className="td-cell text-muted-foreground">{p.team}</td>
                                 <td className="td-cell">{p.pos}</td>
-                                <td className="td-cell text-accent font-bold">{p.injury}</td>
+                                <td className="td-cell text-red-500 font-bold">{p.injury}</td>
                                 <td className="td-cell"><span className="status-badge status-injured">Injured</span></td>
                                 <td className="td-cell">{p.returnTime}</td>
                             </tr>
