@@ -102,7 +102,7 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
     // However, the "accent" line at top currently uses primaryColor.
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" onClick={onClose}>
+        <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" onClick={onClose}>
             {/* Main Container - "NBA 2K" Style */}
             <div
                 className={`relative w-full max-w-5xl bg-[#121212] rounded-none shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border-t-4 transition-all duration-500 ${tierStyle.glow}`}
@@ -397,7 +397,7 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                 </div>
 
                 {/* Action Buttons: Close & Share */}
-                <div className="absolute top-4 right-4 flex items-center gap-2">
+                <div className="absolute top-4 right-4 flex items-center gap-2 z-50">
                     <button
                         onClick={() => {
                             const text = `Check out ${player.name} (${playerOvr} OVR) on EDG League!\n${player.ppg} PPG | ${player.rpg} RPG | ${player.apg} APG`;
@@ -411,7 +411,7 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                     </button>
                     <button
                         onClick={onClose}
-                        className="text-white/20 hover:text-white transition-colors text-2xl font-bold w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10"
+                        className="text-white/20 hover:text-white transition-colors text-2xl font-bold w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10"
                     >
                         &times;
                     </button>
