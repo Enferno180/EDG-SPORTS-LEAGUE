@@ -52,6 +52,33 @@ export function getBenchmarkGrade(value: number, benchmark: number, lowerIsBette
         return 'DEV';
     }
 
+    // Special Case: Rebounds (User Custom Tiers)
+    if (statKey === 'rpg') {
+        if (value >= 10.0) return 'LEGEND';
+        if (value >= 7.0) return 'ELITE';
+        if (value >= 5.0) return 'PRO';
+        if (value >= 4.0) return 'ROOKIE';
+        return 'DEV';
+    }
+
+    // Special Case: Assists (User Custom Tiers)
+    if (statKey === 'apg') {
+        if (value >= 9.0) return 'LEGEND';
+        if (value >= 7.0) return 'ELITE';
+        if (value >= 5.0) return 'PRO';
+        if (value >= 3.0) return 'ROOKIE';
+        return 'DEV';
+    }
+
+    // Special Case: Defense (Steals & Blocks - Unified Scale)
+    if (statKey === 'spg' || statKey === 'bpg') {
+        if (value >= 2.6) return 'LEGEND';
+        if (value >= 1.3) return 'ELITE';
+        if (value >= 0.7) return 'PRO';
+        if (value >= 0.4) return 'ROOKIE';
+        return 'DEV';
+    }
+
     // Standard Logic for other stats
     const ratio = lowerIsBetter ? benchmark / value : value / benchmark;
 
