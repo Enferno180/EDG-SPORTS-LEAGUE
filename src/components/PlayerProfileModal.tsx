@@ -355,18 +355,29 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
 
                                 <div className="flex flex-wrap gap-4">
                                     {(() => {
-                                        const hardcodedBadges = player.badges || [];
-                                        return (hardcodedBadges.length > 0 || computedBadges.length > 0) ? (
-                                            [...hardcodedBadges, ...computedBadges]
-                                                .filter((b, i, self) => i === self.findIndex((t) => t.name === b.name))
-                                                .map((badge) => (
-                                                    <Badge key={badge.name} badgeId={badge.name} size="md" />
-                                                ))
+                                        const uniqueBadges = new Map();
+
+                                        // 1. Add Hardcoded Badges (Priority)
+                                        (player.badges || []).forEach(b => uniqueBadges.set(b.name.toUpperCase(), b));
+
+                                        // 2. Add Computed Badges (if not already present)
+                                        computedBadges.forEach(b => {
+                                            if (!uniqueBadges.has(b.name.toUpperCase())) {
+                                                uniqueBadges.set(b.name.toUpperCase(), b);
+                                            }
+                                        });
+
+                                        const allBadges = Array.from(uniqueBadges.values());
+
+                                        return allBadges.length > 0 ? (
+                                            allBadges.map((badge) => (
+                                                <Badge key={badge.name} badgeId={badge.name} size="md" />
+                                            ))
                                         ) : (
                                             <div className="p-8 w-full text-center border border-white/5 rounded bg-white/5">
                                                 <span className="text-white/30 text-lg italic">No badges equipped.</span>
                                             </div>
-                                        )
+                                        );
                                     })()}
                                 </div>
                             </div>
