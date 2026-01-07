@@ -98,7 +98,7 @@ export default function RootLayout({
                                 <ul className="space-y-2">
                                     <li><Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</Link></li>
                                     <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
-                                    <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms of Use</Link></li>
+                                    <li><Link href="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms of Use</Link></li>
                                 </ul>
                             </div>
                         </div>
