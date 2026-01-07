@@ -5,6 +5,7 @@ import { Header } from '@/components/Header'
 import { Ticker } from '@/components/Ticker'
 import Link from 'next/link'
 import Image from 'next/image'
+import { InstagramLogo, FacebookLogo, YoutubeLogo } from '@phosphor-icons/react/dist/ssr'
 
 export const metadata: Metadata = {
     title: 'EDG SPORTS LEAGUE',
@@ -60,10 +61,15 @@ export default function RootLayout({
                                     Elevating the game in Philadelphia.
                                 </p>
                                 <div className="flex gap-4">
-                                    {/* Social placeholders */}
-                                    <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-primary hover:text-black transition-colors flex items-center justify-center cursor-pointer">IG</div>
-                                    <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-primary hover:text-black transition-colors flex items-center justify-center cursor-pointer">X</div>
-                                    <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-primary hover:text-black transition-colors flex items-center justify-center cursor-pointer">YT</div>
+                                    <Link href="https://www.instagram.com/edgsportsleague?igsh=eGlzMnB6YjBqMWRz&utm_source=qr" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 hover:bg-primary hover:text-black transition-colors flex items-center justify-center">
+                                        <InstagramLogo size={20} weight="fill" />
+                                    </Link>
+                                    <Link href="https://www.facebook.com/share/17Xw8CV6kw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 hover:bg-primary hover:text-black transition-colors flex items-center justify-center">
+                                        <FacebookLogo size={20} weight="fill" />
+                                    </Link>
+                                    <div className="w-8 h-8 rounded-full bg-white/5 text-white/20 cursor-not-allowed flex items-center justify-center" aria-disabled="true" title="Coming Soon">
+                                        <YoutubeLogo size={20} weight="fill" />
+                                    </div>
                                 </div>
                             </div>
 
