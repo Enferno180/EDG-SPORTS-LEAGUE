@@ -14,6 +14,7 @@ export default auth((req) => {
     const protectedRoutes = [
         { path: '/admin', roles: ['ADMIN'] },
         { path: '/coach', roles: ['ADMIN', 'COACH'] },
+        { path: '/scorekeeper', roles: ['ADMIN', 'SCOREKEEPER'] },
     ]
 
     const routeConfig = protectedRoutes.find(r => nextUrl.pathname.startsWith(r.path));

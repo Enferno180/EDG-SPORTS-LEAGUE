@@ -32,6 +32,9 @@ export const authConfig = {
             if (pathname.startsWith("/coach")) {
                 return auth?.user?.role === "ADMIN" || auth?.user?.role === "COACH"
             }
+            if (pathname.startsWith("/scorekeeper")) {
+                return auth?.user?.role === "ADMIN" || auth?.user?.role === "SCOREKEEPER"
+            }
             return true
         },
         jwt({ token, user }) {

@@ -83,7 +83,7 @@ async function main() {
     await prisma.user.deleteMany({
         where: {
             email: {
-                in: ['admin@edg.com', 'coach@edg.com', 'fan@edg.com']
+                in: ['admin@edg.com', 'coach@edg.com', 'fan@edg.com', 'john.doe@example.com']
             }
         }
     })
@@ -99,6 +99,10 @@ async function main() {
     })
     await prisma.user.create({
         data: { email: 'fan@edg.com', password: '123', role: 'FAN', name: 'Super Fan' }
+    })
+    // Updated from SCOUT to SCOREKEEPER
+    await prisma.user.create({
+        data: { email: 'john.doe@example.com', password: '123', role: 'SCOREKEEPER', name: 'Official Scorekeeper' }
     })
 
     // 3. Seed Teams

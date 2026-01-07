@@ -7,17 +7,17 @@ declare module "next-auth" {
      */
     interface Session {
         user: {
-            role: 'ADMIN' | 'COACH' | 'PLAYER' | 'FAN'
+            role: 'ADMIN' | 'COACH' | 'PLAYER' | 'FAN' | 'SCOREKEEPER'
         } & DefaultSession["user"]
     }
 
     interface User {
-        role: 'ADMIN' | 'COACH' | 'PLAYER' | 'FAN'
+        role: 'ADMIN' | 'COACH' | 'PLAYER' | 'FAN' | 'SCOREKEEPER'
     }
 }
 
 declare module "next-auth/jwt" {
     interface JWT {
-        role: 'ADMIN' | 'COACH' | 'PLAYER' | 'FAN'
+        role: 'ADMIN' | 'COACH' | 'PLAYER' | 'FAN' | 'SCOREKEEPER'
     }
 }
