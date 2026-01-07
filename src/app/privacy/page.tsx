@@ -90,6 +90,9 @@ export default function PrivacyPage() {
 
                     <div className="pt-10 border-t border-white/10 mt-12 text-center">
                         <p className="mb-6 italic text-white/50">
+                            Privacy concerns? Contact our Data Protection Officer at <a href="mailto:edgsportsinfo@edgsportsleague.com" className="text-white hover:text-primary font-bold">edgsportsinfo@edgsportsleague.com</a>
+                        </p>
+                        <p className="mb-6 italic text-white/50">
                             Your safety is our game plan.
                         </p>
                         <Link href="/" className="inline-block px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded text-sm font-bold tracking-widest uppercase transition-colors">
