@@ -75,7 +75,7 @@ export async function finalizeGame(gameId: string, stats: any[], homeScore: numb
                     totalBlocks: { increment: stat.blocks || 0 },
                     totalTurnovers: { increment: stat.turnovers || 0 },
 
-                    ppg: { divide: [{ add: [{ multiply: ['ppg', 'gamesPlayed'] }, stat.points || 0] }, { add: ['gamesPlayed', 1] }] },
+                    // ppg: { divide: [{ add: [{ multiply: ['ppg', 'gamesPlayed'] }, stat.points || 0] }, { add: ['gamesPlayed', 1] }] },
                     // ... simpler approximation for averages would be re-calc, but Prisma atomic ops are limited for averages.
                     // For prototype, just incrementing totals is fine.
                     // Triggering a re-calc function would be better.
