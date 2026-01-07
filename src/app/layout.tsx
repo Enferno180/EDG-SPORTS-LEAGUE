@@ -96,7 +96,7 @@ export default function RootLayout({
                             <div className="col-span-1">
                                 <h4 className="font-head font-bold text-white mb-4 tracking-wider">SUPPORT</h4>
                                 <ul className="space-y-2">
-                                    <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</Link></li>
+                                    <li><Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</Link></li>
                                     <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
                                     <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms of Use</Link></li>
                                 </ul>
