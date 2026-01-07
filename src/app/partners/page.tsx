@@ -42,8 +42,9 @@ export default function PartnersPage() {
 
                 {/* Optional: Call to Action for potential partners? User didn't ask for it, but "Contact Us" link is good practice. */}
                 <div className="pt-12">
-                    <a href="/contact" className="text-white/40 hover:text-white text-xs uppercase tracking-widest transition-colors border-b border-transparent hover:border-white">
-                        Interested in Partnering? Contact Us
+                    <p className="text-white/60 text-sm font-bold uppercase tracking-widest mb-2">Interested in Partnering?</p>
+                    <a href="mailto:edgsportsinfo@edgsportsleague.com" className="text-edg-red hover:text-white text-base md:text-lg font-mono transition-colors border-b border-transparent hover:border-white select-all">
+                        edgsportsinfo@edgsportsleague.com
                     </a>
                 </div>
             </div>

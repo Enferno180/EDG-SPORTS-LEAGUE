@@ -54,6 +54,9 @@ export default function ContactPage() {
                             <span className="tracking-widest uppercase">Contact Us Now</span>
                         </span>
                     </a>
+                    <p className="mt-4 text-xs text-white/30 font-mono select-all">
+                        or email us directly at: <span className="text-white/60">edgsportsinfo@edgsportsleague.com</span>
+                    </p>
                 </div>
             </div>
         </div>
