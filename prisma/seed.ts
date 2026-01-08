@@ -1,170 +1,134 @@
 
 import { PrismaClient } from '@prisma/client'
+import { TEAMS } from '../src/lib/data'
 
 const prisma = new PrismaClient()
 
-const TEAMS = [
-    {
-        name: 'Dauphin Ducks',
-        logo: '/teams/dauphin-ducks.png',
-        wins: 45,
-        losses: 12,
-        colors: { primary: '#FF7F00', accent: '#008080' }, // Orange & Teal
-        players: [
-            { name: "Marcus 'The Mountain' Pike", jersey: "00", pos: "C", height: "7'1\"", overall: 96, archetype: "Paint Beast", avatar: "/avatars/marcus_pike.png" },
-            { name: "Tyrese Maxey Jr.", jersey: "0", pos: "PG", height: "6'3\"", overall: 92, archetype: "Playmaking Shot Creator", avatar: "/avatars/maxey_jr.png" }
-        ]
-    },
-    {
-        name: 'Vine Street Venom',
-        logo: '/teams/vine-street-venom.png',
-        wins: 38,
-        losses: 19,
-        colors: { primary: '#6A0DAD', accent: '#00FA9A' }, // Purple & Spring Green
-        players: [
-            { name: "Kobe 'Viper' Bryant III", jersey: "24", pos: "SG", height: "6'6\"", overall: 94, archetype: "Scoring Machine", avatar: "/avatars/kobe_iii.png" },
-            { name: "Darius Garland II", jersey: "10", pos: "PG", height: "6'1\"", overall: 88, archetype: "Offensive Threat", avatar: "/avatars/garland_ii.png" }
-        ]
-    },
-    {
-        name: 'Point Breeze Panthers',
-        logo: '/teams/point-breeze-panthers.png',
-        wins: 30,
-        losses: 27,
-        colors: { primary: '#000080', accent: '#FFD700' }, // Navy & Gold
-        players: [
-            { name: "LeBron James IV", jersey: "23", pos: "SF", height: "6'9\"", overall: 91, archetype: "All-Around 2-Way", avatar: "/avatars/lebron_iv.png" },
-            { name: "Bronny James III", jersey: "6", pos: "PG", height: "6'4\"", overall: 85, archetype: "Two-Way Guard", avatar: "/avatars/bronny_iii.png" }
-        ]
-    },
-    {
-        name: 'Olney Owls',
-        logo: '/teams/olney-owls.png',
-        wins: 22,
-        losses: 35,
-        colors: { primary: '#800000', accent: '#F0E68C' }, // Maroon & Khaki
-        players: [
-            { name: "Chris Paul Jr.", jersey: "3", pos: "PG", height: "6'0\"", overall: 89, archetype: "Floor General", avatar: "/avatars/cp_jr.png" },
-            { name: "Deandre Ayton Jr.", jersey: "22", pos: "C", height: "7'0\"", overall: 84, archetype: "Glass Cleaner", avatar: "/avatars/ayton_jr.png" }
-        ]
-    },
-    {
-        name: 'Kensington Kobras',
-        logo: '/teams/kensington-kobras.png',
-        wins: 15,
-        losses: 42,
-        colors: { primary: '#FF0000', accent: '#000000' }, // Red & Black
-        players: [
-            { name: "Allen Iverson Reborn", jersey: "3", pos: "SG", height: "6'0\"", overall: 93, archetype: "Ankle Breaker", avatar: "/avatars/ai_reborn.png" },
-            { name: "Dikembe Mutombo Jr.", jersey: "55", pos: "C", height: "7'2\"", overall: 86, archetype: "Paint Defender", avatar: "/avatars/mutombo_jr.png" }
-        ]
-    },
-    {
-        name: 'Manayunk Martians',
-        logo: '/teams/manayunk-martians.png',
-        wins: 10,
-        losses: 47,
-        colors: { primary: '#32CD32', accent: '#4B0082' }, // Lime & Indigo
-        players: [
-            { name: "Marvin the Baller", jersey: "1", pos: "PG", height: "5'9\"", overall: 99, archetype: "Galaxy Opal", avatar: "/avatars/marvin.png" },
-            { name: "Z-Bo 3000", jersey: "50", pos: "PF", height: "6'9\"", overall: 85, archetype: "Post Scorer", avatar: "/avatars/zbo.png" }
-        ]
-    }
-];
-
 async function main() {
-    console.log('Starting seed...')
+    console.log('Starting Soul Transfer (Seed)...')
 
-    // 1. Clear existing data
-    await prisma.attendance.deleteMany()
-    await prisma.scoutingNote.deleteMany()
-    await prisma.team.deleteMany()
-    await prisma.player.deleteMany()
-    await prisma.user.deleteMany({
-        where: {
-            email: {
-                in: ['admin@edg.com', 'coach@edg.com', 'fan@edg.com', 'john.doe@example.com']
-            }
-        }
-    })
+    // 1. Clear existing data to avoid duplicates (The "Purge" before the "Upload")
+    // Deleting in correct order to handle foreign keys
+    try {
+        await prisma.attendance.deleteMany()
+        await prisma.scoutingNote.deleteMany()
+        await prisma.orderItem.deleteMany() // Clear orders related to users if any hard reset needed (optional, effectively just clearing game data here mainly)
+        // We won't clear Users/Orders indiscriminately to preserve Admin value if it existed, 
+        // but for this specific "Soul Transfer" of Teams/Players, we wipe them.
 
-    // 2. Create Users
-    console.log('Seeding users...')
-    // Execute sequentially to avoid SQLite locking issues or engine panics
-    await prisma.user.create({
-        data: { email: 'admin@edg.com', password: '123', role: 'ADMIN', name: 'League Commissioner' }
-    })
-    await prisma.user.create({
-        data: { email: 'coach@edg.com', password: '123', role: 'COACH', name: 'Head Coach' }
-    })
-    await prisma.user.create({
-        data: { email: 'fan@edg.com', password: '123', role: 'FAN', name: 'Super Fan' }
-    })
-    // Updated from SCOUT to SCOREKEEPER
-    await prisma.user.create({
-        data: { email: 'john.doe@example.com', password: '123', role: 'SCOREKEEPER', name: 'Official Scorekeeper' }
-    })
+        await prisma.game.deleteMany() // Delete games first as they reference teams
+        await prisma.player.deleteMany()
+        await prisma.team.deleteMany()
 
-    // 3. Seed Teams
-    console.log('Seeding teams...')
+        console.log('Old mannequins removed.')
+    } catch (e) {
+        console.log('Fresh database or error clearing:', e)
+    }
+
+    // 2. Seed Teams & Players
+    console.log(`Injecting ${TEAMS.length} teams...`)
+
     for (const teamData of TEAMS) {
+        console.log(`Processing: ${teamData.name}`)
+
         const slug = teamData.name.toLowerCase().replace(/\s+/g, '-')
+
         await prisma.team.create({
             data: {
                 name: teamData.name,
                 slug: slug,
                 logo: teamData.logo,
+                division: teamData.division,
                 wins: teamData.wins,
                 losses: teamData.losses,
+                offRating: teamData.offRating,
+                defRating: teamData.defRating,
+                netRating: teamData.netRating,
                 primaryColor: teamData.colors.primary,
                 secondaryColor: teamData.colors.accent,
+
                 players: {
                     create: teamData.players.map(p => ({
+                        // Basic Info
                         name: p.name,
-                        number: parseInt(p.jersey),
+                        number: p.jersey,
                         position: p.pos,
                         height: p.height,
-                        weight: "200 lbs",
+                        weight: "200 lbs", // Default as data.ts might not have it for all, or we could add random variation if strictly needed, but 200 is safe
                         ovr: p.overall,
                         archetype: p.archetype,
                         avatar: p.avatar,
+
+                        // Status
+                        // status: p.status, // mapped via inference if needed, or we just store 'injury' text in a note? 
+                        // The schema doesn't have a status Enum yet, but it has 'injury' string potentially?
+                        // Schema has: isProspect, waiverSignedAt... 
+                        // Let's check schema: NO 'status' field in Player model. 
+                        // But we have `ScoutingNote`? No, we probably want to add data for injuries if meaningful.
+                        // For now, we'll skip 'status' text unless we add it to schema. 
+                        // Wait, user asked for "Mannequins" to represent advertisement. 
+                        // The attributes are the key.
+
+                        // Stats
+                        mpg: p.mpg,
+                        ppg: p.ppg,
+                        rpg: p.rpg,
+                        apg: p.apg,
+                        spg: p.spg,
+                        bpg: p.bpg,
+                        tov: p.tov,
+                        fgPct: p.fgPct,
+                        threePtPct: p.threePtPct,
+                        ftPct: p.ftPct,
+
+                        // Attributes (Flattened from p.attributes)
+                        insideScoring: p.attributes.insideScoring,
+                        midRangeScoring: p.attributes.midRangeScoring,
+                        threePointScoring: p.attributes.threePointScoring,
+                        passing: p.attributes.passing,
+                        ballHandling: p.attributes.ballHandling,
+                        perimeterDefense: p.attributes.perimeterDefense,
+                        postDefense: p.attributes.postDefense,
+                        steals: p.attributes.steals,
+                        blocks: p.attributes.blocks,
+                        rebounding: p.attributes.rebounding,
+                        athleticism: p.attributes.athleticism,
+                        dunking: p.attributes.dunking,
+
+                        // Badges (Stored as JSON)
+                        badges: p.badges as any, // Cast to any to satisfy Prisma Json type
+
+                        // Drill Scores (Mocking/Defaulting if not in data.ts, but user said 'mock players' have them. 
+                        // data.ts attributes are 0-99. Drills in schema are raw numbers (seconds, inches).
+                        // We will leave drills null for now or calculate them? 
+                        // Best to leave null rather then fake it poorly. The 0-99 attributes are what populate the UI charts.
                     }))
                 }
             }
         })
     }
 
-    // 4. Seed Mock Prospects
-    console.log('Seeding prospects...')
-    const MOCK_PROSPECTS = [
-        { name: 'Xavier "X" King', pos: 'PG', h: '6\'3"', w: '190 lbs', school: 'Duke', ovr: 88, archetype: 'Shot Creator' },
-        { name: 'Malik Johnson', pos: 'SG', h: '6\'5"', w: '205 lbs', school: 'Kentucky', ovr: 85, archetype: 'Sharpshooter' },
-        { name: 'Dante Green', pos: 'SF', h: '6\'8"', w: '225 lbs', school: 'Villanova', ovr: 84, archetype: 'Two-Way Wing' },
-        { name: 'Marcus Truth', pos: 'PF', h: '6\'10"', w: '240 lbs', school: 'North Carolina', ovr: 82, archetype: 'Post Playmaker' },
-        { name: 'Zion Little', pos: 'C', h: '7\'1"', w: '260 lbs', school: 'Gonzaga', ovr: 86, archetype: 'Rim Protector' },
-        { name: 'Jalen Rose 2.0', pos: 'PG', h: '6\'4"', w: '195 lbs', school: 'Michigan', ovr: 80, archetype: 'Playmaker' },
-        { name: 'Trey Youngster', pos: 'SG', h: '6\'2"', w: '180 lbs', school: 'Oklahoma', ovr: 79, archetype: 'Shot Creator' },
-        { name: 'Bronny James Jr.', pos: 'SF', h: '6\'6"', w: '215 lbs', school: 'USC', ovr: 81, archetype: 'Slasher' },
-        { name: 'Shaq O\'Neal III', pos: 'C', h: '7\'0"', w: '280 lbs', school: 'LSU', ovr: 83, archetype: 'Paint Beast' },
-        { name: 'Cade Cunningham II', pos: 'PG', h: '6\'7"', w: '220 lbs', school: 'Oklahoma State', ovr: 87, archetype: 'Floor General' }
-    ];
-
-    await Promise.all(MOCK_PROSPECTS.map(p =>
-        prisma.player.create({
-            data: {
-                name: p.name,
-                position: p.pos,
-                height: p.h,
-                weight: p.w,
-                school: p.school,
-                ovr: p.ovr,
-                archetype: p.archetype,
-                isProspect: true // No stats in schema yet
-            }
+    // 3. User Accounts (Ensuring Admin exists)
+    // We only create if not exists to avoid unique constraint errors if we didn't fully wipe users
+    const adminEmail = 'admin@edg.com'
+    const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } })
+    if (!existingAdmin) {
+        await prisma.user.create({
+            data: { email: adminEmail, password: '123', role: 'ADMIN', name: 'League Commissioner' }
         })
-    ));
+        console.log('Admin account created.')
+    }
 
-    console.log('Seeding completed successfully.')
+    // John Doe Scorekeeper
+    const scorerEmail = 'john.doe@example.com'
+    const existingScorer = await prisma.user.findUnique({ where: { email: scorerEmail } })
+    if (!existingScorer) {
+        await prisma.user.create({
+            data: { email: scorerEmail, password: '123', role: 'SCOREKEEPER', name: 'Official Scorekeeper' }
+        })
+    }
+
+    console.log('Soul Transfer Complete. The mannequins are alive.')
 }
 
 main()

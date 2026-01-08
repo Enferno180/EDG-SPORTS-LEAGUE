@@ -34,17 +34,29 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
 
     const computedBadges = useMemo(() => {
         if (!player) return [];
+        if (!player) return [];
+        // Support both old static type and new dynamic type
         return Object.values(ALL_BADGES)
-            .filter(def => def.qualify && def.qualify(player))
-            .map(def => ({ name: def.name, tier: 'Gold' as const })); // Default to Gold for calculated badges
+            .filter(def => def.qualify && def.qualify(player as any)) // Cast to any to bypass strict type check for now
+            .map(def => ({ name: def.name, tier: 'Gold' as const }));
     }, [player]);
 
     if (!isOpen || !player) return null;
 
-    // Find the team to get colors
-    const teamData = TEAMS.find(t => t.name === player.team);
-    const primaryColor = teamData?.colors.primary || '#d4af37'; // Default Gold
-    const accentColor = teamData?.colors.accent || '#000000';
+    // START DYNAMIC DATA ADAPTER
+    // created to handle both Legacy "data.ts" strings and New "Prisma" objects
+    const teamName = typeof player.team === 'string' ? player.team : player.team?.name;
+
+    // Check if player has nested team data (Prisma include)
+    const dynamicTeam = typeof player.team === 'object' ? player.team : null;
+
+    // Fallback to finding in static TEAMS if not provided in player object
+    const staticTeam = TEAMS.find(t => t.name === teamName);
+
+    const primaryColor = dynamicTeam?.primaryColor || staticTeam?.colors.primary || '#d4af37';
+    const accentColor = dynamicTeam?.secondaryColor || staticTeam?.colors.accent || '#000000';
+    const teamLogo = dynamicTeam?.logo || staticTeam?.logo;
+    // END DYNAMIC DATA ADAPTER
 
     const playerOvr = player.attributes ? calculateOVR(player.attributes, player.pos) : player.overall;
     const ovrGrade = getBenchmarkGrade(playerOvr, 99);
@@ -150,8 +162,8 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
                                 <span className='text-white'>{player.pos}</span>
                                 <span className="w-px h-3 bg-white/30"></span>
                                 <div className="flex items-center gap-2">
-                                    {teamData?.logo && <img src={teamData.logo} alt={player.team} className="w-5 h-5 object-contain" />}
-                                    <span>{player.team}</span>
+                                    {teamLogo && <img src={teamLogo} alt={teamName} className="w-5 h-5 object-contain" />}
+                                    <span>{teamName}</span>
                                 </div>
                                 <span className="w-px h-3 bg-white/30"></span>
                                 <span>{player.height}</span>

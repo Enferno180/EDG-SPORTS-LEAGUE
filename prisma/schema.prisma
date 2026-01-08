@@ -66,6 +66,7 @@ model Team {
   name           String
   slug           String   @unique
   logo           String
+  division       String   @default("UNKNOWN")
   wins           Int      @default(0)
   losses         Int      @default(0)
   primaryColor   String
@@ -193,6 +194,8 @@ model Player {
   
   gamesPlayed Int    @default(0)
   progression String? // JSON string storing mini-target progress
+  
+  badges      Json    @default("[]") // Array of { name, tier } objects
    
   waiverSignedAt DateTime?
   attendance Attendance[]

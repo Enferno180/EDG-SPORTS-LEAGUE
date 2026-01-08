@@ -27,8 +27,11 @@ export default async function AdminLayout({
                     <Link href="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
                         <i className="ph-fill ph-chart-line-up"></i> Financials
                     </Link>
-                    <Link href="/admin/roster" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
-                        <i className="ph-fill ph-users-three"></i> Roster & Teams
+                    <Link href="/admin/teams" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
+                        <i className="ph-fill ph-users-three"></i> Team Manager
+                    </Link>
+                    <Link href="/admin/players" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
+                        <i className="ph-fill ph-user-circle"></i> Player Manager
                     </Link>
                     <Link href="/admin/games" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
                         <i className="ph-fill ph-calendar-plus"></i> Game Uploads
