@@ -1,3 +1,4 @@
+
 'use server';
 
 import prisma from "@/lib/prisma";
@@ -35,59 +36,110 @@ export async function createGame(data: {
     }
 }
 
-export async function finalizeGame(gameId: string, stats: any[], homeScore: number, awayScore: number) {
+// THE ARBITER: Records every action safely
+export async function recordEvent(gameId: string, eventData: {
+    type: string; // POINT, FOUL, SUB, TIMEOUT, PERIOD_START, PERIOD_END, GAME_END
+    period: string;
+    gameClock?: string;
+    teamId?: string;
+    playerId?: string;
+    value?: number; // e.g. 2, 3, 1 (points) OR 1 (foul count)
+    metadata?: any;
+}) {
     const session = await auth();
     if (!session || (session.user?.role !== 'SCOREKEEPER' && session.user?.role !== 'ADMIN')) {
         return { error: "Unauthorized" };
     }
 
     try {
-        // 1. Update Game Status
-        await prisma.game.update({
-            where: { id: gameId },
+        // 1. Log the Immutable Event
+        await prisma.gameEvent.create({
             data: {
-                status: 'FINAL',
-                homeScore,
-                awayScore,
-                gameClock: '00:00',
-                currentQuarter: 4 // or dynamic if OT?
+                gameId,
+                type: eventData.type,
+                period: eventData.period,
+                gameClock: eventData.gameClock || "00:00",
+                teamId: eventData.teamId,
+                playerId: eventData.playerId,
+                value: eventData.value || 0,
+                metadata: eventData.metadata || {},
+                authorId: session.user.id
             }
         });
 
-        // 2. Process Player Stats (Existing logic from games/actions adapted)
-        // For now, we just log them or assume we update Player totals
-        // In a real app, we would create GameStat records.
-        // Since we don't have GameStat model in the partial schema seen, 
-        // we will update the aggregate Player stats directly.
+        // 2. Update Live Game State (Atomic increments)
+        // This ensures if two scorekeepers spam buttons, DB handles the math.
 
-        for (const stat of stats) {
-            // stat is expected to have { playerId, points, ... }
-            if (!stat.playerId) continue;
+        // Handling Score Updates
+        if (eventData.type === 'POINT' && eventData.teamId && eventData.value) {
+            const isHome = (await prisma.game.findUnique({ where: { id: gameId } }))?.homeTeamId === eventData.teamId;
 
-            await prisma.player.update({
-                where: { id: stat.playerId },
+            await prisma.game.update({
+                where: { id: gameId },
                 data: {
-                    gamesPlayed: { increment: 1 },
-                    totalPoints: { increment: stat.points || 0 },
-                    totalRebounds: { increment: stat.rebounds || 0 },
-                    totalAssists: { increment: stat.assists || 0 },
-                    totalSteals: { increment: stat.steals || 0 },
-                    totalBlocks: { increment: stat.blocks || 0 },
-                    totalTurnovers: { increment: stat.turnovers || 0 },
-
-                    // ppg: { divide: [{ add: [{ multiply: ['ppg', 'gamesPlayed'] }, stat.points || 0] }, { add: ['gamesPlayed', 1] }] },
-                    // ... simpler approximation for averages would be re-calc, but Prisma atomic ops are limited for averages.
-                    // For prototype, just incrementing totals is fine.
-                    // Triggering a re-calc function would be better.
+                    [isHome ? 'homeScore' : 'awayScore']: { increment: eventData.value }
                 }
             });
+
+            // Update Player Stats if player is attached
+            if (eventData.playerId) {
+                // Determine stat fields to increment based on value
+                // Helper logic: point value tells us FGM/3PM/FTM loosely? 
+                // Better to pass explicit "statType" in metadata for precision.
+                const statType = eventData.metadata?.statType; // 'FGM', '3PM', 'FTM'
+
+                const updateData: any = {
+                    totalPoints: { increment: eventData.value }
+                    // Update specific shooting stats if provided
+                };
+
+                if (statType === 'FGM') { updateData.fgm = { increment: 1 }; updateData.fga = { increment: 1 }; }
+                else if (statType === '3PM') { updateData.threePtm = { increment: 1 }; updateData.threePta = { increment: 1 }; updateData.fgm = { increment: 1 }; updateData.fga = { increment: 1 }; } // 3PM counts as FGM too
+                else if (statType === 'FTM') { updateData.ftm = { increment: 1 }; updateData.fta = { increment: 1 }; }
+
+                await prisma.player.update({
+                    where: { id: eventData.playerId },
+                    data: updateData
+                });
+            }
         }
 
-        revalidatePath('/scorekeeper');
-        revalidatePath('/teams');
+        // Handling Other Stats (Rebounds, Assists, etc.)
+        if (eventData.type === 'STAT' && eventData.playerId && eventData.metadata?.statType) {
+            const statKey = eventData.metadata.statType; // 'REB', 'AST', 'STL', 'BLK', 'TOV'
+            const map: any = {
+                'REB': 'totalRebounds',
+                'AST': 'totalAssists',
+                'STL': 'totalSteals',
+                'BLK': 'totalBlocks',
+                'TOV': 'totalTurnovers'
+            };
+
+            if (map[statKey]) {
+                await prisma.player.update({
+                    where: { id: eventData.playerId },
+                    data: { [map[statKey]]: { increment: 1 } }
+                });
+            }
+        }
+
+        revalidatePath(`/scorekeeper`); // Refresh UI
         return { success: true };
     } catch (e) {
-        console.error("Finalize Game Error:", e);
-        return { error: "Failed to finalize game" };
+        console.error("Record Event Error:", e);
+        return { error: "Failed to record event" };
     }
+}
+
+// Fetch Game State (for sync)
+export async function getGameState(gameId: string) {
+    const game = await prisma.game.findUnique({
+        where: { id: gameId },
+        include: {
+            homeTeam: { include: { players: true } },
+            awayTeam: { include: { players: true } },
+            events: { orderBy: { createdAt: 'desc' }, take: 50 } // Latest 50 events for log
+        }
+    });
+    return game;
 }

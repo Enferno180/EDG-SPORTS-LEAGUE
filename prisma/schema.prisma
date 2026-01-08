@@ -57,6 +57,9 @@ model User {
   orders        Order[]
   
   gamesScored   Game[]    @relation("Scorekeeper")
+  
+  eventsAuthored GameEvent[]
+  incidentReports IncidentReport[]
 }
 
 // ... existing models ...
@@ -84,6 +87,8 @@ model Team {
   
   homeGames      Game[]   @relation("HomeGames")
   awayGames      Game[]   @relation("AwayGames")
+  
+  events         GameEvent[]
 }
 
 // ... existing models ...
@@ -112,8 +117,39 @@ model Game {
   scorekeeperId String?
   scorekeeper   User?    @relation("Scorekeeper", fields: [scorekeeperId], references: [id])
   
+  events        GameEvent[] // The immutable log of everything that happened
+  
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  
+  incidents     IncidentReport[]
+}
+
+model GameEvent {
+  id        String   @id @default(cuid())
+  gameId    String
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  
+  type      String   // POINT, FOUL, SUB, TIMEOUT, PERIOD_START, PERIOD_END, UNDO
+  period    String   // Q1, Q2, etc.
+  gameClock String?  // "10:42"
+  
+  teamId    String?
+  team      Team?    @relation(fields: [teamId], references: [id])
+  
+  playerId  String?
+  player    Player?  @relation(fields: [playerId], references: [id])
+  
+  value     Int      @default(0) // e.g., 2 for +2pts, -1 for undo?
+  metadata  Json?    // { subInId: "...", subOutId: "..." }
+  
+  authorId  String?
+  author    User?    @relation(fields: [authorId], references: [id])
+  
+  createdAt DateTime @default(now())
+  
+  @@index([gameId])
+  @@index([playerId])
 }
 
 model Player {
@@ -201,6 +237,9 @@ model Player {
   attendance Attendance[]
   notes      ScoutingNote[]
   user       User?
+  
+  events     GameEvent[]
+  incidents  IncidentReport[]
 }
 
 model Attendance {
@@ -296,4 +335,25 @@ model OrderItem {
   priceAtTime   Int      // Capture price at purchase to avoid data drift
   
   @@index([orderId])
+}
+
+model IncidentReport {
+  id          String   @id @default(cuid())
+  type        String   // INJURY, BEHAVIOR, EJECTION, DISPUTE, OTHER
+  severity    String   // LOW, MEDIUM, HIGH, CRITICAL
+  description String
+  status      String   @default("OPEN") // OPEN, REVIEWING, RESOLVED
+
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+
+  players     Player[] // Players involved
+
+  gameId      String?
+  game        Game?    @relation(fields: [gameId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([authorId])
 }

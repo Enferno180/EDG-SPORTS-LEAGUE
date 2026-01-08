@@ -45,10 +45,10 @@ export function PlayerProfileModal({ player, isOpen, onClose }: PlayerProfileMod
 
     // START DYNAMIC DATA ADAPTER
     // created to handle both Legacy "data.ts" strings and New "Prisma" objects
-    const teamName = typeof player.team === 'string' ? player.team : player.team?.name;
+    const teamName = typeof player.team === 'string' ? player.team : (player.team as any)?.name;
 
     // Check if player has nested team data (Prisma include)
-    const dynamicTeam = typeof player.team === 'object' ? player.team : null;
+    const dynamicTeam = typeof player.team === 'object' ? (player.team as any) : null;
 
     // Fallback to finding in static TEAMS if not provided in player object
     const staticTeam = TEAMS.find(t => t.name === teamName);

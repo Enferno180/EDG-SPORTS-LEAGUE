@@ -1,57 +1,62 @@
+
 'use server';
 
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
 
-export async function markAttendance(playerId: string, status: 'ON_TIME' | 'LATE' | 'NO_SHOW') {
+export async function submitIncidentReport(data: {
+    type: string;
+    severity: string;
+    description: string;
+    playerIds: string[];
+    gameId?: string;
+}) {
     const session = await auth();
-    if (!session || session.user?.role !== 'COACH' && session.user?.role !== 'ADMIN') {
+    if (!session || !session.user?.id || (session.user?.role !== 'COACH' && session.user?.role !== 'ADMIN')) {
         return { error: "Unauthorized" };
     }
 
     try {
-        await prisma.attendance.create({
+        await prisma.incidentReport.create({
             data: {
-                playerId,
-                status,
-                date: new Date()
+                type: data.type,
+                severity: data.severity,
+                description: data.description,
+                status: 'OPEN',
+                authorId: session.user.id,
+                gameId: data.gameId || null,
+                players: {
+                    connect: data.playerIds.map(id => ({ id }))
+                }
             }
         });
+
         revalidatePath('/coach');
         return { success: true };
-    } catch (error) {
-        console.error("Attendance Error:", error);
-        return { error: "Failed to mark attendance" };
+    } catch (e) {
+        console.error("Submit Incident Error:", e);
+        return { error: "Failed to submit report" };
     }
 }
 
-export async function addScoutingNote(playerId: string, content: string) {
+export async function getCoachData() {
     const session = await auth();
-    if (!session || (!session.user?.role?.includes('COACH') && session.user?.role !== 'ADMIN')) {
-        return { error: "Unauthorized" };
+    if (!session || (session.user?.role !== 'COACH' && session.user?.role !== 'ADMIN')) {
+        return null; // Handle UI redirect if null
     }
 
-    // Check if role is COACH or ADMIN (The check above was a bit weird, simplifying)
-    const role = session.user?.role;
-    if (role !== 'COACH' && role !== 'ADMIN') {
-        return { error: "Unauthorized" };
-    }
+    // Mocking "My Team" for now since Users aren't directly linked to Teams in schema yet
+    // In a real app, User would have `teamId` or we'd query via connected Player profile
+    const allPlayers = await prisma.player.findMany({
+        orderBy: { name: 'asc' }
+    });
 
-    if (!session.user?.id) return { error: "User ID not found" };
+    const recentIncidents = await prisma.incidentReport.findMany({
+        where: { authorId: session.user.id },
+        orderBy: { createdAt: 'desc' },
+        include: { players: true }
+    });
 
-    try {
-        await prisma.scoutingNote.create({
-            data: {
-                content,
-                playerId: playerId,
-                authorId: session.user.id
-            }
-        });
-        revalidatePath('/coach');
-        return { success: true };
-    } catch (error) {
-        console.error("Note Error:", error);
-        return { error: "Failed to add note" };
-    }
+    return { allPlayers, recentIncidents };
 }
