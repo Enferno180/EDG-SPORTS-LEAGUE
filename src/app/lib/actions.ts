@@ -41,6 +41,15 @@ export async function authenticate(
                     return 'Something went wrong.'
             }
         }
-        throw error
+
+        // Rethrow Next.js Redirects (key for success flow)
+        if ((error as any)?.message === 'NEXT_REDIRECT' ||
+            (error as any)?.message?.includes('NEXT_REDIRECT') ||
+            (error as any)?.digest?.includes('NEXT_REDIRECT')) {
+            throw error;
+        }
+
+        console.error('Login Error:', error);
+        return 'An unexpected error occurred. Please try again.';
     }
 }

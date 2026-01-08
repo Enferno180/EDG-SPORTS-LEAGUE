@@ -27,7 +27,7 @@ export default function Page() {
                 </div>
 
                 <div className="text-red-500 text-sm h-4">
-                    {errorMessage && <p>{errorMessage}</p>}
+                    {errorMessage && typeof errorMessage === 'string' && <p>{errorMessage}</p>}
                 </div>
 
                 <LoginButton />

@@ -27,7 +27,15 @@ export async function getRecentOrders() {
     return await prisma.order.findMany({
         orderBy: { createdAt: 'desc' },
         take: 20,
-        include: { user: true },
+        include: {
+            user: true,
+            items: {
+                include: {
+                    product: true,
+                    ticketType: true
+                }
+            }
+        },
     });
 }
 

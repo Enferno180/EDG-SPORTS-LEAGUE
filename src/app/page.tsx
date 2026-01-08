@@ -80,7 +80,7 @@ export default function Home() {
 
             {/* QUICK LINKS / STATS STRIP - High Density Horizontal Scroll */}
             <section className="bg-card border-y border-border/50 py-4 lg:py-6 mb-8 lg:mb-12 overflow-x-auto no-scrollbar sticky top-[80px] z-30 shadow-lg lg:static lg:shadow-none">
-                <div className="containe mx-auto lg:px-5 flex items-center gap-8 lg:gap-12 min-w-max px-5">
+                <div className="container mx-auto lg:px-5 flex items-center gap-8 lg:gap-12 min-w-max px-5">
                     <Link href="/stats/standings" className="flex items-center gap-3 group min-w-[200px]">
                         <div className="w-8 h-8 lg:w-10 lg:h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-sm lg:text-base">1</div>
                         <div>
