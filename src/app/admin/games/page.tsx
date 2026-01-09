@@ -27,10 +27,10 @@ export default function GameUploadPage() {
 
             <div className="bg-gray-900 border border-white/10 p-6 rounded-lg mb-8">
                 <p className="text-gray-400 mb-4 text-sm">
-                    Paste the JSON array of player stats below. This will automatically update player averages and increment their "Games Played" count.
+                    Paste the JSON array of player stats below. This will automatically update player averages and increment their &quot;Games Played&quot; count.
                 </p>
                 <p className="text-xs text-gray-500 font-mono mb-4 bg-black/50 p-2 rounded">
-                    Format: [{"{"}"playerName": "John Doe", "points": 20, "rebounds": 5, "assists": 2, "steals": 1, "blocks": 0, "turnovers": 3, "fgm": 8, "fga": 15 ...{"}"}, ...]
+                    Format: [{"{"}&quot;playerName&quot;: &quot;John Doe&quot;, &quot;points&quot;: 20, &quot;rebounds&quot;: 5, &quot;assists&quot;: 2, &quot;steals&quot;: 1, &quot;blocks&quot;: 0, &quot;turnovers&quot;: 3, &quot;fgm&quot;: 8, &quot;fga&quot;: 15 ...{"}"}, ...]
                 </p>
 
                 <textarea

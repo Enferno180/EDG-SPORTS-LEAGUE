@@ -8,7 +8,7 @@ export default function LabPage() {
             <div className="container mx-auto">
                 <h1 className="text-5xl font-head text-white mb-4 text-center">PLAYER TIER SYSTEM</h1>
                 <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
-                    Visualizing the progression from Prospect to Legend. The "Black Diamond" tier represents the pinnacle of the league.
+                    Visualizing the progression from Prospect to Legend. The &quot;Black Diamond&quot; tier represents the pinnacle of the league.
                 </p>
 
                 <div className="flex flex-wrap justify-center gap-8 items-center">

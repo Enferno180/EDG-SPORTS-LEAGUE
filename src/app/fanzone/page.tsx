@@ -52,7 +52,7 @@ export default function FanZonePage() {
                         </div>
                         <ul className="membership-features">
                             <li>✓ Priority Seating at Main Court</li>
-                            <li>✓ Exclusive "City Edition" Jersey</li>
+                            <li>✓ Exclusive &quot;City Edition&quot; Jersey</li>
                             <li>✓ 15% Off Team Shop</li>
                             <li>✓ Meet & Greet w/ MVPs</li>
                         </ul>
@@ -96,7 +96,7 @@ export default function FanZonePage() {
                     <div className="shop-placeholder bg-muted flex items-center justify-center h-48 rounded-md">
                         <span className="text-muted-foreground">HOODIE MOCKUP</span>
                     </div>
-                    <h3>"FATAL FOUR" HOODIE</h3>
+                    <h3>&quot;FATAL FOUR&quot; HOODIE</h3>
                     <p className="text-accent mt-1">$65.00</p>
                     <div className="mt-auto">
                         <div className="text-xs text-muted-foreground mb-1">or 4 payments of $16.25</div>

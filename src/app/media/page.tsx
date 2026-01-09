@@ -43,7 +43,7 @@ export default function MediaPage() {
                     <h3 className="media-pass-title">EDG SPORTS TV</h3>
                     <p className="media-pass-desc">
                         Stream every game live in HD. Get access to full game replays,
-                        exclusive locker room content, and the "mic'd up" series.
+                        exclusive locker room content, and the &quot;mic&apos;d up&quot; series.
                     </p>
                     <div className="flex justify-center gap-5 flex-wrap">
                         <button className="btn btn-outline border-white text-white hover:bg-white hover:text-black">SINGLE GAME ($5.99)</button>

@@ -39,7 +39,7 @@ export default function Page() {
                 </div>
             </form>
             <div className="absolute bottom-10 text-white/30 text-xs">
-                Don't have an account? <a href="/signup" className="text-white hover:text-red-500 underline">Sign Up</a>
+                Don&apos;t have an account? <a href="/signup" className="text-white hover:text-red-500 underline">Sign Up</a>
             </div>
         </div>
     )
