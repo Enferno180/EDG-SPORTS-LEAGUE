@@ -7,12 +7,12 @@ export default async function AdminLayout({
 }: {
     children: React.ReactNode
 }) {
-    try {
-        const session = await auth();
-        if (session?.user?.role !== 'ADMIN') {
-            redirect('/');
-        }
+    const session = await auth();
+    if (session?.user?.role !== 'ADMIN') {
+        redirect('/');
+    }
 
+    try {
         const userName = session?.user?.name || 'Admin';
         const userEmail = session?.user?.email || 'admin@edg.com';
 
