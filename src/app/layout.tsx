@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     description: 'Elevating the Game. Empowering the Future.',
 }
 
+export const dynamic = 'force-dynamic';
+
 import { Providers } from './providers'
 
 // ... existing code ...
