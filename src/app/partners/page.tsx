@@ -32,7 +32,7 @@ export default function PartnersPage() {
                     <div className="h-1 w-24 bg-white/20 mx-auto rounded-full"></div>
 
                     <p className="text-xl md:text-2xl text-white/90 leading-relaxed font-light max-w-2xl mx-auto italic">
-                        "We are working on partnerships as we speak. We are home grown and looking to grow here at all first!"
+                        &quot;We are working on partnerships as we speak. We are home grown and looking to grow here at all first!&quot;
                     </p>
 
                     <p className="text-sm font-bold tracking-widest text-edg-red uppercase pt-4">

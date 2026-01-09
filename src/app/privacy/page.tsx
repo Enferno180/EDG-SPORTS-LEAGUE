@@ -84,7 +84,7 @@ export default function PrivacyPage() {
                             6. Cookies & Tracking
                         </h2>
                         <p>
-                            We use cookies sparingly—primarily to keep you logged in and to remember your preferences (like your favorite team theme). You can control cookie settings through your browser, though disabling them may affect some "cool factor" features of the site.
+                            We use cookies sparingly—primarily to keep you logged in and to remember your preferences (like your favorite team theme). You can control cookie settings through your browser, though disabling them may affect some &quot;cool factor&quot; features of the site.
                         </p>
                     </section>
 

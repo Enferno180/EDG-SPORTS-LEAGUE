@@ -86,7 +86,7 @@ export default async function TVPage() {
                                     <Lock size={48} className="text-edg-red mb-4" />
                                     <h4 className="font-bold text-xl mb-2">Locker Room Access</h4>
                                     <p className="text-xs text-white/70 mb-4 max-w-[200px]">
-                                        Exclusive mic'd up content and raw footage.
+                                        Exclusive mic&apos;d up content and raw footage.
                                     </p>
                                     <Link href="/join">
                                         <button className="bg-edg-red text-white text-xs font-bold px-4 py-2 rounded uppercase tracking-widest hover:bg-red-700 transition-colors">
