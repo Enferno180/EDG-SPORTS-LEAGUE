@@ -6,7 +6,8 @@ export const authConfig = {
         logo: "/edg-logo.jpg",
     },
     session: { strategy: "jwt" },
-    secret: "super_secure_secret_key_12345", // In production, use process.env.AUTH_SECRET
+    trustHost: true,
+    secret: process.env.AUTH_SECRET,
     pages: {
         signIn: '/login',
     },

@@ -1,0 +1,537 @@
+
+> edg_next@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.1.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local, .env
+
+> [PWA] PWA support is disabled
+> [PWA] PWA support is disabled
+ ✓ Ready in 7s
+ ○ Compiling /src/middleware ...
+ ✓ Compiled /src/middleware in 558ms (221 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 14.2s (12866 modules)
+ ✓ Compiled in 1320ms (4808 modules)
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 4s (8062 modules)
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 2.1s (8087 modules)
+ ○ Compiling /login ...
+ ✓ Compiled /login in 6.3s (13092 modules)
+ ○ Compiling /admin ...
+ ✓ Compiled /admin in 5.7s (13119 modules)
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 972ms (8323 modules)
+ ○ Compiling /admin/dashboard ...
+ ✓ Compiled /admin/dashboard in 5.8s (14031 modules)
+ ○ Compiling /admin/teams ...
+ ✓ Compiled /admin/teams in 1581ms (14035 modules)
+ ○ Compiling /admin/players ...
+ ✓ Compiled /admin/players in 1732ms (14038 modules)
+ ○ Compiling /admin/games ...
+ ✓ Compiled /admin/games in 2.1s (14065 modules)
+ ○ Compiling /not-found ...
+ ✓ Compiled /not-found in 4.5s (14069 modules)
+ ○ Compiling /api/admin/export ...
+ ✓ Compiled /api/admin/export in 1832ms (8629 modules)
+ ○ Compiling /login ...
+ ✓ Compiled /login in 3.1s (8753 modules)
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 4.1s (8757 modules)
+ ✓ Compiled (8782 modules)
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+ ✓ Compiled in 18.5s (13567 modules)
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 3.9s (8324 modules)
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 2.8s (8326 modules)
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+ ○ Compiling /admin ...
+ ✓ Compiled /admin in 12s (8353 modules)
+ ○ Compiling /scorekeeper ...
+ ✓ Compiled /scorekeeper in 12.9s (13614 modules)
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /api/auth/[...nextauth] in 8.3s (8374 modules)
+ ✓ Compiled (8376 modules)
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+Read more at https://errors.authjs.dev/#credentialssignin
+[31m[auth][error][0m CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+[31m[auth][cause][0m: Error
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:265:23)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:67:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:126:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:57:17)
+    at async authenticate (webpack-internal:///(action-browser)/./src/app/lib/actions.ts:37:9)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:406
+    at async t4 (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:38:6379)
+    at async rk (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\compiled\next-server\app-page.runtime.dev.js:39:25934)
+    at async doRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1394:30)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1555:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1463:28)
+    at async DevServer.renderPageComponent (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1856:24)
+    at async DevServer.renderToResponseImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:1894:32)
+    at async DevServer.pipeImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:911:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\next-server.js:271:17)
+    at async DevServer.handleRequestImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\base-server.js:807:17)
+    at async C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:331:20
+    at async Span.traceAsyncFn (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\trace\trace.js:151:20)
+    at async DevServer.handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\dev\next-dev-server.js:328:24)
+    at async invokeRender (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:163:21)
+    at async handleRequest (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:342:24)
+    at async requestHandlerImpl (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\router-server.js:366:13)
+    at async Server.requestListener (C:\Users\mwils\.gemini\antigravity\scratch\edg_next\node_modules\next\dist\server\lib\start-server.js:140:13)
+[31m[auth][details][0m: {
+  "provider": "credentials"
+}
+ ○ Compiling /signup ...
+ ✓ Compiled /signup in 18.8s (13620 modules)
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /api/auth/[...nextauth] in 7.8s (8376 modules)
+ ✓ Compiled (8378 modules)
+ ✓ Compiled in 34.1s (13625 modules)
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 9s (8353 modules)
+[ScorekeeperPage] Session: {
+  "user": {
+    "name": "Scorekeeper",
+    "email": "scorekeeper@edg.com",
+    "role": "SCOREKEEPER"
+  },
+  "expires": "2026-02-09T16:51:26.843Z"
+}
+ ✓ Compiled in 6s (13629 modules)
+ ✓ Compiled in 28.4s (13625 modules)

@@ -144,6 +144,14 @@ export default async function AdminDashboard() {
                                                                 + Coach
                                                             </button>
                                                         </form>
+                                                        <form action={async () => {
+                                                            "use server";
+                                                            await updateUserRole(user.id, 'SCOREKEEPER');
+                                                        }}>
+                                                            <button className="text-[10px] bg-orange-500/20 text-orange-400 hover:bg-orange-500/40 px-2 py-1 rounded font-bold uppercase">
+                                                                + Scorekeeper
+                                                            </button>
+                                                        </form>
                                                     </>
                                                 )}
                                                 {user.role !== 'FAN' && (

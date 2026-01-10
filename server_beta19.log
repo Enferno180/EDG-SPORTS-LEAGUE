@@ -1,0 +1,18 @@
+
+> edg_next@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.1.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local, .env
+
+> [PWA] PWA support is disabled
+> [PWA] PWA support is disabled
+ ✓ Ready in 9.4s
+ ○ Compiling / ...
+ ✓ Compiled / in 29.2s (12866 modules)
+ ✓ Compiled in 2.1s (4808 modules)
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 5.6s (8085 modules)
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 3.2s (8087 modules)

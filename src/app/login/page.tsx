@@ -32,10 +32,8 @@ export default function Page() {
 
                 <LoginButton />
 
-                <div className="mt-4 text-xs text-white/30">
-                    <p>Test Credentials:</p>
-                    <p>Admin: admin@edg.com / 123</p>
-                    <p>Player: player@edg.com / 123</p>
+                <div className="mt-4 text-xs text-white/30 text-center">
+                    <p>Protected Area. Authorized Personnel Only.</p>
                 </div>
             </form>
             <div className="absolute bottom-10 text-white/30 text-xs">

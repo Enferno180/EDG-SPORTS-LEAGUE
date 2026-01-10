@@ -40,7 +40,7 @@ export default async function AdminLayout({
                         <Link href="/admin/games" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
                             <i className="ph-fill ph-calendar-plus"></i> Game Uploads
                         </Link>
-                        <Link href="/admin/live-score" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
+                        <Link href="/scorekeeper" className="flex items-center gap-3 px-4 py-3 text-muted-foreground rounded font-bold uppercase tracking-wider text-sm hover:bg-white/5 hover:text-white transition-colors">
                             <i className="ph-fill ph-game-controller"></i> Live Scorekeeper
                         </Link>
                     </nav>
